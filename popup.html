@@ -2,153 +2,28 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <style>
-        body {
-            width: 332px;
-            padding: 16px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f0f0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        .container {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
-            padding: 16px;
-            color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .header h1 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 600;
-        }
-        
-        .status {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            text-align: center;
-            backdrop-filter: blur(8px);
-            transition: all 0.3s ease;
-        }
-        
-        .status.read {
-            background: rgba(76, 175, 80, 0.15);
-            border: 2px solid #4CAF50;
-            box-shadow: 0 0 15px rgba(76, 175, 80, 0.1);
-        }
-        
-        .status.unread {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
-        }
-        
-        .status-text {
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        
-        .url-display {
-            font-size: 12px;
-            opacity: 0.8;
-            word-break: break-all;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 8px;
-            border-radius: 6px;
-            margin-top: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .action-button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .mark-read {
-            background: #4CAF50;
-            color: white;
-        }
-        
-        .mark-read:hover {
-            background: #45a049;
-            transform: translateY(-1px);
-        }
-        
-        .mark-unread {
-            background: #f44336;
-            color: white;
-        }
-        
-        .mark-unread:hover {
-            background: #da190b;
-            transform: translateY(-1px);
-        }
-        
-        .view-history-button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            margin-top: 10px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .view-history-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-1px);
-        }
-        
-        .stats {
-            margin-top: 15px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            font-size: 12px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-        }
-    </style>
+    <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
+    <div class="popup-container">
+        <div class="popup-header">
             <h1>📚 Mark as Read</h1>
         </div>
         
-        <div id="status" class="status">
+        <div id="status" class="popup-status">
             <div class="status-text" id="statusText">检查中...</div>
             <div class="url-display" id="urlDisplay"></div>
         </div>
         
-        <button id="actionButton" class="action-button">标记为已读</button>
+        <button id="actionButton" class="popup-button primary">
+            标记为已读
+        </button>
         
-        <button id="viewHistoryButton" class="view-history-button">📋 查看已读历史</button>
+        <button id="viewHistoryButton" class="popup-button secondary">
+            📋 查看已读历史
+        </button>
         
-        <div class="stats">
+        <div class="popup-stats">
             <div>总计已读: <span id="totalRead">0</span> 个页面</div>
         </div>
     </div>

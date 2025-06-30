@@ -79,16 +79,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         const sortedEntries = sortData(readUrls, currentSort);
         
         if (sortedEntries.length === 0) {
-            loadingDiv.style.display = 'none';
-            emptyStateDiv.style.display = 'block';
-            historyTable.style.display = 'none';
+            loadingDiv.classList.add('hidden');
+            emptyStateDiv.classList.remove('hidden');
+            historyTable.classList.add('hidden');
             totalCountSpan.textContent = '0';
             return;
         }
         
-        loadingDiv.style.display = 'none';
-        emptyStateDiv.style.display = 'none';
-        historyTable.style.display = 'table';
+        loadingDiv.classList.add('hidden');
+        emptyStateDiv.classList.add('hidden');
+        historyTable.classList.remove('hidden');
         totalCountSpan.textContent = sortedEntries.length;
         
         historyTableBody.innerHTML = '';

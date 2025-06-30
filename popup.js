@@ -72,15 +72,15 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 更新界面状态
     function updateUI() {
         if (isRead) {
-            statusDiv.className = 'status read';
+            statusDiv.className = 'popup-status read';
             statusText.innerHTML = '✅ 已标记为已读';
             actionButton.textContent = '取消标记';
-            actionButton.className = 'action-button mark-unread';
+            actionButton.className = 'popup-button primary unread';
         } else {
-            statusDiv.className = 'status unread';
+            statusDiv.className = 'popup-status';
             statusText.innerHTML = '📖 未读';
             actionButton.textContent = '标记为已读';
-            actionButton.className = 'action-button mark-read';
+            actionButton.className = 'popup-button primary';
         }
     }
     
