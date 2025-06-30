@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const totalReadSpan = document.getElementById('totalRead');
     
     let currentUrl = '';
+    let currentTitle = '';
     let normalizedUrl = '';
     let isRead = false;
     
@@ -43,7 +44,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         try {
             const tab = await getCurrentTab();
             currentUrl = tab.url;
+            currentTitle = tab.title || '无标题'; // 获取当前标签页的标题
             normalizedUrl = normalizeUrl(currentUrl);
+            
+            // 调试信息
+            console.log('获取到的标题:', currentTitle);
+            console.log('获取到的URL:', currentUrl);
             
             // 显示当前URL（截取显示）
             const displayUrl = currentUrl.length > 50 ? 
@@ -97,7 +103,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             } else {
                 // 标记为已读（使用规范化的URL作为key）
                 readUrls[normalizedUrl] = {
-                    title: document.title,
+                    title: currentTitle,
                     timestamp: Date.now(),
                     domain: new URL(currentUrl).hostname,
                     originalUrl: currentUrl // 保存原始URL用于参考
@@ -123,6 +129,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     // 绑定事件
     actionButton.addEventListener('click', toggleReadStatus);
+    
+    // 绑定查看历史按钮事件
+    const viewHistoryButton = document.getElementById('viewHistoryButton');
+    viewHistoryButton.addEventListener('click', function() {
+        chrome.tabs.create({ url: chrome.runtime.getURL('history.html') });
+    });
     
     // 初始化
     init();

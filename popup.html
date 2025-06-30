@@ -100,6 +100,27 @@
             transform: translateY(-1px);
         }
         
+        .view-history-button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .view-history-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+        
         .stats {
             margin-top: 15px;
             padding: 10px;
@@ -124,6 +145,8 @@
         </div>
         
         <button id="actionButton" class="action-button">标记为已读</button>
+        
+        <button id="viewHistoryButton" class="view-history-button">📋 查看已读历史</button>
         
         <div class="stats">
             <div>总计已读: <span id="totalRead">0</span> 个页面</div>

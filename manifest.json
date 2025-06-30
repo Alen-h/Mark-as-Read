@@ -5,7 +5,8 @@
   "description": "记录并标记已访问的网页URL",
   "permissions": [
     "storage",
-    "activeTab"
+    "activeTab",
+    "tabs"
   ],
   "host_permissions": [
     "http://*/*",

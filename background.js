@@ -47,8 +47,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             chrome.storage.sync.get(['readUrls']).then((result) => {
                 const readUrls = result.readUrls || {};
                 const normalizedUrl = normalizeUrl(request.url);
+                
+                // 如果没有提供标题，尝试从发送者标签页获取
+                let title = request.title || '';
+                if (!title && sender.tab) {
+                    title = sender.tab.title || '';
+                }
+                
                 readUrls[normalizedUrl] = {
-                    title: request.title || '',
+                    title: title,
                     timestamp: Date.now(),
                     domain: new URL(request.url).hostname,
                     originalUrl: request.url // 保存原始URL用于参考
