@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Mark as Read",
   "version": "1.0",
-  "description": "记录并标记已访问的网页URL",
+  "description": "Record and mark visited web page URLs",
   "permissions": [
     "storage",
     "activeTab",

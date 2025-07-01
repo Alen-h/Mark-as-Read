@@ -18,6 +18,7 @@ alwaysApply: true
 - Function descriptions, variable explanations, and inline comments MUST use Chinese
 - Code documentation and technical notes MUST be in Chinese
 - TODO comments and development notes MUST be in Chinese
+- Debug prints (such as console.log) MAY use English for convenience - only code comments are required to be in Chinese
 
 ## 🏗️ Project Architecture
 

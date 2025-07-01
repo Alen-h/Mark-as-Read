@@ -7,14 +7,14 @@ function normalizeUrl(url) {
         // 只保留protocol, hostname, port, pathname，去掉search和hash
         return `${urlObj.protocol}//${urlObj.host}${urlObj.pathname}`;
     } catch (error) {
-        console.error('URL规范化失败:', error, url);
+        console.error('Failed to normalize URL:', error, url);
         return url; // 如果解析失败，返回原始URL
     }
 }
 
 // 插件安装时的初始化
 chrome.runtime.onInstalled.addListener((details) => {
-    console.log('Mark as Read 插件已安装');
+    console.log('Mark as Read extension installed');
     
     if (details.reason === 'install') {
         // 首次安装时初始化存储
@@ -25,7 +25,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 // 监听存储变化
 chrome.storage.onChanged.addListener((changes, namespace) => {
     if (namespace === 'sync' && changes.readUrls) {
-        console.log('已读URL列表已更新');
+        console.log('Read URL list updated');
     }
 });
 

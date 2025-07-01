@@ -2,27 +2,27 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>已读历史记录 - Mark as Read</title>
+    <title>Read History - Mark as Read</title>
     <link rel="stylesheet" href="history.css">
 </head>
 <body>
     <div class="history-container">
         <div class="history-header">
-            <h1>📚 已读历史记录</h1>
-            <div class="header-subtitle">查看您标记为已读的所有页面</div>
+            <h1>📚 Read History</h1>
+            <div class="header-subtitle">View all pages you've marked as read</div>
         </div>
 
         <div class="history-controls">
             <div class="controls-wrapper">
                 <div class="stats-info">
-                    总计: <span id="totalCount">0</span> 个页面
+                    Total: <span id="totalCount">0</span> pages
                 </div>
                 <div class="sort-controls">
-                    <button class="sort-button active" data-sort="time-desc">最新优先</button>
-                    <button class="sort-button" data-sort="time-asc">最旧优先</button>
-                    <button class="sort-button" data-sort="title">按标题</button>
-                    <button class="sort-button" data-sort="domain">按域名</button>
-                    <button class="sort-button" data-sort="url">按URL</button>
+                    <button class="sort-button active" data-sort="time-desc">Latest First</button>
+                    <button class="sort-button" data-sort="time-asc">Oldest First</button>
+                    <button class="sort-button" data-sort="title">By Title</button>
+                    <button class="sort-button" data-sort="domain">By Domain</button>
+                    <button class="sort-button" data-sort="url">By URL</button>
                 </div>
             </div>
         </div>
@@ -30,27 +30,27 @@
         <div class="table-container">
             <div id="loading" class="loading-state">
                 <div class="loading-spinner"></div>
-                <div>正在加载历史记录...</div>
+                <div>Loading history...</div>
             </div>
             
             <div id="emptyState" class="empty-state hidden">
                 <div class="empty-icon">📖</div>
-                <div class="empty-title">还没有标记任何页面为已读</div>
+                <div class="empty-title">No pages marked as read yet</div>
                 <div class="empty-subtitle">
-                    浏览网页时使用插件标记为已读，记录就会出现在这里
+                    Use the extension to mark pages as read while browsing, and they will appear here
                 </div>
             </div>
 
             <table id="historyTable" class="history-table hidden">
                 <thead>
                     <tr>
-                        <th class="col-title">标题</th>
+                        <th class="col-title">Title</th>
                         <th class="col-url">URL</th>
-                        <th class="col-domain">域名</th>
+                        <th class="col-domain">Domain</th>
                         <th class="col-query">Query</th>
                         <th class="col-fragment">Fragment</th>
-                        <th class="col-time">标记时间</th>
-                        <th class="col-action">操作</th>
+                        <th class="col-time">Marked Time</th>
+                        <th class="col-action">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="historyTableBody">

@@ -12,7 +12,7 @@
             // 只保留protocol, hostname, port, pathname，去掉search和hash
             return `${urlObj.protocol}//${urlObj.host}${urlObj.pathname}`;
         } catch (error) {
-            console.error('URL规范化失败:', error, url);
+            console.error('Failed to normalize URL:', error, url);
             return url; // 如果解析失败，返回原始URL
         }
     }
@@ -28,7 +28,7 @@
         readIndicator.innerHTML = `
             <div class="indicator-content">
                 <span class="indicator-icon">✅</span>
-                <span class="indicator-text">已读</span>
+                <span class="indicator-text">READ</span>
             </div>
         `;
         
@@ -54,7 +54,7 @@
             updateIndicator();
             
         } catch (error) {
-            console.error('检查已读状态失败:', error);
+            console.error('Failed to check read status:', error);
         }
     }
     

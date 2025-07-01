@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             // 只保留protocol, hostname, port, pathname，去掉search和hash
             return `${urlObj.protocol}//${urlObj.host}${urlObj.pathname}`;
         } catch (error) {
-            console.error('URL规范化失败:', error, url);
+            console.error('Failed to normalize URL:', error, url);
             return url; // 如果解析失败，返回原始URL
         }
     }
@@ -45,12 +45,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         try {
             const tab = await getCurrentTab();
             currentUrl = tab.url;
-            currentTitle = tab.title || '无标题'; // 获取当前标签页的标题
+            currentTitle = tab.title || 'Untitled'; // 获取当前标签页的标题
             normalizedUrl = normalizeUrl(currentUrl);
             
             // 调试信息
-            console.log('获取到的标题:', currentTitle);
-            console.log('获取到的URL:', currentUrl);
+            console.log('Retrieved title:', currentTitle);
+            console.log('Retrieved URL:', currentUrl);
             
             // 显示当前标题（截取显示）
             const displayTitle = currentTitle.length > 30 ? 
@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             updateStats();
             
         } catch (error) {
-            console.error('初始化失败:', error);
-            statusText.textContent = '无法获取当前页面信息';
+            console.error('Initialization failed:', error);
+            statusText.textContent = 'Cannot get current page information';
         }
     }
     
@@ -79,13 +79,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     function updateUI() {
         if (isRead) {
             statusDiv.className = 'popup-status read';
-            statusText.innerHTML = '✅ 已标记为已读';
-            actionButton.textContent = '取消标记';
+            statusText.innerHTML = '✅ Marked as Read';
+            actionButton.textContent = 'Unmark';
             actionButton.className = 'popup-button primary unread';
         } else {
             statusDiv.className = 'popup-status';
-            statusText.innerHTML = '📖 未读';
-            actionButton.textContent = '标记为已读';
+            statusText.innerHTML = '📖 Unread';
+            actionButton.textContent = 'Mark as Read';
             actionButton.className = 'popup-button primary';
         }
     }
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             });
             
         } catch (error) {
-            console.error('切换状态失败:', error);
+            console.error('Failed to toggle status:', error);
         }
     }
     

@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 fragment: urlObj.hash
             };
         } catch (error) {
-            console.error('URL解析失败:', error, url);
+            console.error('Failed to parse URL:', error, url);
             return {
                 fullUrl: url,
                 domain: '',
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             // 标题
             const titleCell = document.createElement('td');
             titleCell.className = 'title-cell';
-            const titleText = data.title || '无标题';
+            const titleText = data.title || 'Untitled';
             titleCell.textContent = truncateText(titleText, 20);
             
             // 添加tooltip事件监听
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             actionCell.className = 'action-cell';
             const removeButton = document.createElement('button');
             removeButton.className = 'remove-button';
-            removeButton.title = '移除此记录';
+            removeButton.title = 'Remove this record';
             removeButton.dataset.url = normalizedUrl;
             
             // 添加SVG图标
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 处理删除按钮点击
     async function handleRemoveClick(event) {
         const normalizedUrl = event.target.dataset.url;
-        if (confirm('确定要删除这条记录吗？')) {
+        if (confirm('Are you sure you want to delete this record?')) {
             delete readUrls[normalizedUrl];
             await saveReadUrls(readUrls);
             renderTable();
@@ -262,8 +262,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             readUrls = await getReadUrls();
             renderTable();
         } catch (error) {
-            console.error('加载历史记录失败:', error);
-            loadingDiv.innerHTML = '加载失败，请刷新页面重试';
+            console.error('Failed to load history:', error);
+            loadingDiv.innerHTML = 'Loading failed, please refresh and try again';
         }
     }
     
