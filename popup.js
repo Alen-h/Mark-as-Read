@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function() {
     const statusDiv = document.getElementById('status');
     const statusText = document.getElementById('statusText');
+    const titleDisplay = document.getElementById('titleDisplay');
     const urlDisplay = document.getElementById('urlDisplay');
     const actionButton = document.getElementById('actionButton');
     const totalReadSpan = document.getElementById('totalRead');
@@ -50,6 +51,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             // 调试信息
             console.log('获取到的标题:', currentTitle);
             console.log('获取到的URL:', currentUrl);
+            
+            // 显示当前标题（截取显示）
+            const displayTitle = currentTitle.length > 30 ? 
+                currentTitle.substring(0, 30) + '...' : currentTitle;
+            titleDisplay.textContent = displayTitle;
             
             // 显示当前URL（截取显示）
             const displayUrl = currentUrl.length > 50 ? 

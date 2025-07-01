@@ -69,7 +69,7 @@ body {
 
 .stats-info {
     color: #6b7280;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .stats-info span {
@@ -84,12 +84,12 @@ body {
 }
 
 .sort-button {
-    padding: 6px 12px;
+    padding: 8px 14px;
     border: 1px solid #d1d5db;
     background: white;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 11px;
+    font-size: 13px;
     transition: all 0.3s ease;
     color: #374151;
 }
@@ -136,6 +136,7 @@ body {
     text-align: center;
     padding: 40px 20px;
     color: #6b7280;
+    font-size: 14px;
 }
 
 .loading-spinner {
@@ -201,7 +202,7 @@ body {
 
 .history-table th,
 .history-table td {
-    padding: 12px 8px;
+    padding: 14px 10px;
     text-align: left;
     border-bottom: 1px solid #e5e7eb;
     vertical-align: top;
@@ -222,8 +223,6 @@ body {
 
 .history-table tbody tr:hover {
     background-color: #f8fafc;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 /* 列宽度 */
@@ -239,17 +238,23 @@ body {
 .title-cell {
     font-weight: 500;
     color: #374151;
-    font-size: 13px;
+    font-size: 14px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    max-width: 150px;
+    position: relative;
+    cursor: help;
 }
 
 .url-cell {
-    font-size: 12px;
+    font-size: 14px;
     color: #374151;
-    word-break: break-all;
     line-height: 1.4;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .url-link {
@@ -257,6 +262,12 @@ body {
     text-decoration: none;
     position: relative;
     transition: all 0.2s ease-in-out;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
 }
 
 .url-link::after {
@@ -281,22 +292,18 @@ body {
 .domain-badge {
     display: inline-block;
     padding: 4px 8px;
-    background: #6366f1;
-    color: white;
+    background: #f3f4f6;
+    color: #6b7280;
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     transition: all 0.2s ease-in-out;
 }
 
-.domain-badge:hover {
-    transform: scale(1.05);
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
-}
-
 .query-cell, .fragment-cell {
     max-width: 150px;
-    font-size: 11px;
+    font-size: 12px;
     color: #6b7280;
     word-break: break-all;
 }
@@ -304,12 +311,12 @@ body {
 .empty-cell {
     color: #9ca3af;
     font-style: italic;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .time-text {
     color: #6b7280;
-    font-size: 12px;
+    font-size: 13px;
     white-space: nowrap;
     font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
 }
@@ -319,38 +326,62 @@ body {
 }
 
 .remove-button {
-    padding: 4px 8px;
-    background: #ef4444;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    padding: 6px;
+    background: transparent;
+    color: #9ca3af;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 11px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     position: relative;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
 }
 
-.remove-button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s;
+.remove-button svg {
+    width: 16px;
+    height: 16px;
+    transition: all 0.2s ease;
+}
+
+.remove-button svg path {
+    stroke: #9ca3af;
+    transition: stroke 0.2s ease;
 }
 
 .remove-button:hover {
-    background: #dc2626;
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: #ef4444;
 }
 
-.remove-button:hover::before {
-    width: 300px;
-    height: 300px;
+.remove-button:hover svg path {
+    stroke: #ef4444;
+}
+
+/* Tooltip 样式 */
+.tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    max-width: 400px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.tooltip.show {
+    opacity: 1;
 }
 
 /* 工具类 */
