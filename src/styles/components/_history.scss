@@ -1,0 +1,376 @@
+// Mark as Read - History 现代卡片式布局
+// 极简、扁平、高度可用的历史页面设计
+
+// 基础样式重置
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-family-base;
+  margin: 0;
+  padding: $spacing-lg;
+  background: $bg-gray-light;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+// 主容器 - 简洁白色卡片
+.history-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  @include card-flat;
+}
+
+// 头部 - 简洁的主色调背景
+.history-header {
+  @include container-primary;
+  padding: $spacing-xl;
+  text-align: center;
+  
+  h1 {
+    margin: 0;
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-semibold;
+    color: white;
+  }
+}
+
+.header-subtitle {
+  margin-top: $spacing-xs;
+  font-size: $font-size-base;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+// 控制区域
+.history-controls {
+  padding: $spacing-xl;
+  border-bottom: $border-width solid $border-color;
+  background: $bg-gray;
+}
+
+.controls-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  
+  @include tablet {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+}
+
+.stats-info {
+  color: $gray-600;
+  font-size: $font-size-lg;
+  
+  span {
+    font-weight: $font-weight-semibold;
+    color: $theme-primary;
+  }
+}
+
+.sort-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+}
+
+.sort-button {
+  @include button-secondary;
+  font-size: $font-size-sm;
+  
+  &.active {
+    background: $theme-primary;
+    color: white;
+    border-color: $theme-primary;
+  }
+}
+
+// 内容区域
+.history-content {
+  min-height: 400px;
+}
+
+// 加载状态
+.loading-state {
+  text-align: center;
+  padding: $spacing-2xl $spacing-lg;
+  color: $gray-500;
+  font-size: $font-size-base;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 2px solid $border-color;
+  border-bottom-color: $theme-primary;
+  border-radius: 50%;
+  @include loading-spin;
+  margin-bottom: $spacing-sm;
+}
+
+// 空状态
+.empty-state {
+  text-align: center;
+  padding: $spacing-2xl $spacing-lg;
+  color: $gray-500;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: $spacing-md;
+  color: $gray-300;
+}
+
+.empty-title {
+  font-size: $font-size-xl;
+  margin-bottom: $spacing-sm;
+  color: $gray-700;
+  font-weight: $font-weight-medium;
+}
+
+.empty-subtitle {
+  font-size: $font-size-base;
+  color: $gray-500;
+}
+
+.error-message {
+  color: $theme-error;
+  font-weight: $font-weight-medium;
+}
+
+// 历史记录列表
+.history-list {
+  padding: $spacing-lg;
+  display: grid;
+  gap: $spacing-md;
+  grid-template-columns: 1fr;
+  
+  @include tablet {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: $spacing-lg;
+  }
+}
+
+// 历史记录卡片
+.history-card {
+  @include card-flat;
+  padding: 0;
+  transition: all $transition-base;
+  opacity: 0;
+  transform: translateY(20px);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+  
+  &.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  &.removing {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all 0.3s ease-in;
+  }
+}
+
+// 卡片头部
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: $spacing-lg $spacing-lg $spacing-md $spacing-lg;
+  border-bottom: $border-width solid $bg-gray;
+}
+
+.card-title {
+  flex: 1;
+  min-width: 0;
+  
+  h3 {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $gray-800;
+    margin: 0 0 $spacing-xs 0;
+    @include text-clamp(2);
+    line-height: 1.4;
+  }
+}
+
+.domain-badge {
+  display: inline-block;
+  padding: $spacing-xs $spacing-sm;
+  background: $theme-accent-light;
+  color: $theme-accent-dark;
+  border-radius: $border-radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  border: $border-width solid $theme-accent;
+}
+
+.card-actions {
+  flex-shrink: 0;
+  margin-left: $spacing-md;
+}
+
+.remove-button {
+  @include button-base;
+  background: transparent;
+  color: $gray-400;
+  padding: $spacing-xs;
+  border-radius: $border-radius-sm;
+  border-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    background: $theme-error-light;
+    color: $theme-error;
+    border-color: $theme-error;
+  }
+  
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// 卡片内容
+.card-content {
+  padding: 0 $spacing-lg $spacing-md $spacing-lg;
+}
+
+.url-section {
+  margin-bottom: $spacing-sm;
+}
+
+.url-link {
+  color: $theme-accent;
+  text-decoration: none;
+  font-size: $font-size-sm;
+  font-family: monospace;
+  word-break: break-all;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: $theme-accent-dark;
+    text-decoration: underline;
+  }
+}
+
+.url-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  margin-top: $spacing-xs;
+}
+
+.url-param {
+  font-size: $font-size-xs;
+  color: $gray-600;
+  background: $bg-gray;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  font-family: monospace;
+  border: $border-width solid $border-color;
+}
+
+// 卡片底部
+.card-footer {
+  padding: $spacing-md $spacing-lg;
+  background: $bg-gray-light;
+  border-top: $border-width solid $border-color;
+  border-radius: 0 0 $border-radius-md $border-radius-md;
+}
+
+.time-text {
+  font-size: $font-size-xs;
+  color: $gray-500;
+  font-weight: $font-weight-medium;
+}
+
+// 动画
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 工具类
+.hidden {
+  display: none;
+}
+
+// 响应式设计 
+@include mobile {
+  body {
+    padding: $spacing-md;
+  }
+  
+  .history-container {
+    border-radius: $border-radius-md;
+  }
+  
+  .history-header {
+    padding: $spacing-lg;
+    
+    h1 {
+      font-size: $font-size-2xl;
+    }
+  }
+  
+  .history-controls {
+    padding: $spacing-md;
+  }
+  
+  .sort-button {
+    font-size: $font-size-xs;
+    padding: $spacing-xs $spacing-sm;
+  }
+  
+  .history-list {
+    padding: $spacing-md;
+    gap: $spacing-md;
+  }
+  
+  .card-header {
+    padding: $spacing-md;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-sm;
+  }
+  
+  .card-actions {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+  
+  .card-content {
+    padding: 0 $spacing-md $spacing-md $spacing-md;
+  }
+  
+  .card-footer {
+    padding: $spacing-sm $spacing-md;
+  }
+  
+  .domain-badge {
+    font-size: $font-size-xs;
+    padding: 2px $spacing-xs;
+  }
+} 

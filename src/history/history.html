@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <div class="table-container">
+        <div class="history-content">
             <div id="loading" class="loading-state">
                 <div class="loading-spinner"></div>
                 <div>Loading history...</div>
@@ -41,21 +41,9 @@
                 </div>
             </div>
 
-            <table id="historyTable" class="history-table hidden">
-                <thead>
-                    <tr>
-                        <th class="col-title">Title</th>
-                        <th class="col-url">URL</th>
-                        <th class="col-domain">Domain</th>
-                        <th class="col-query">Query</th>
-                        <th class="col-fragment">Fragment</th>
-                        <th class="col-time">Marked Time</th>
-                        <th class="col-action">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="historyTableBody">
-                </tbody>
-            </table>
+            <div id="historyList" class="history-list hidden">
+                <!-- 动态生成的历史记录卡片将在这里显示 -->
+            </div>
         </div>
     </div>
 

@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 绑定查看历史按钮事件
     const viewHistoryButton = document.getElementById('viewHistoryButton');
     viewHistoryButton.addEventListener('click', function() {
-        chrome.tabs.create({ url: chrome.runtime.getURL('history.html') });
+        chrome.tabs.create({ url: chrome.runtime.getURL('src/history/history.html') });
     });
     
     // 初始化

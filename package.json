@@ -1,0 +1,35 @@
+{
+  "name": "mark-as-read",
+  "version": "1.0.0",
+  "description": "一个简单易用的Chrome插件，帮助你标记和追踪已访问的网页。",
+  "main": "index.js",
+  "scripts": {
+    "build:scss": "sass src/styles:src --style=compressed --no-source-map",
+    "build:scss:popup": "sass src/styles/popup.scss:src/popup/popup.css --style=compressed --no-source-map",
+    "build:scss:history": "sass src/styles/history.scss:src/history/history.css --style=compressed --no-source-map",
+    "build:scss:content": "sass src/styles/content.scss:src/content/styles.css --style=compressed --no-source-map",
+    "build:scss:dev": "sass src/styles:src --style=expanded --source-map",
+    "watch:scss": "sass src/styles:src --watch --style=expanded --source-map",
+    "watch:scss:popup": "sass src/styles/popup.scss:src/popup/popup.css --watch --style=expanded --source-map",
+    "watch:scss:history": "sass src/styles/history.scss:src/history/history.css --watch --style=expanded --source-map",
+    "watch:scss:content": "sass src/styles/content.scss:src/content/styles.css --watch --style=expanded --source-map",
+    "build:all": "npm run build:scss:popup && npm run build:scss:history && npm run build:scss:content",
+    "watch:all": "concurrently \"npm run watch:scss:popup\" \"npm run watch:scss:history\" \"npm run watch:scss:content\"",
+    "dev": "npm run watch:all",
+    "build": "npm run build:all",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chrome-extension",
+    "mark-as-read",
+    "web-tracking",
+    "productivity"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.69.5"
+  }
+}

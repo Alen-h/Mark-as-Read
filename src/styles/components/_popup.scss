@@ -1,0 +1,170 @@
+// Mark as Read - Popup 极简扁平化样式
+// 简洁、扁平、高对比度的弹出窗口设计
+
+// 基础样式重置
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 332px;
+  padding: $spacing-md;
+  font-family: $font-family-base;
+  background: $bg-gray-light;
+  margin: 0;
+}
+
+// 主容器 - 极简白色卡片
+.popup-container {
+  @include container-flat;
+  padding: $spacing-lg;
+  color: $gray-800;
+}
+
+// 头部区域
+.popup-header {
+  text-align: center;
+  margin-bottom: $spacing-lg;
+  
+  h1 {
+    margin: 0;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $gray-900;
+  }
+}
+
+// 状态区域 - 简洁的状态卡片
+.popup-status {
+  background: $bg-gray-light;
+  padding: $spacing-md;
+  border-radius: $border-radius-md;
+  border: $border-width solid $border-color-light;
+  margin-bottom: $spacing-md;
+  text-align: center;
+  transition: border-color $transition-base;
+  
+  // 已读状态 - 使用简洁的绿色状态
+  &.read {
+    @include state-success;
+  }
+}
+
+.status-text {
+  font-size: $font-size-base;
+  margin-bottom: $spacing-sm;
+  font-weight: $font-weight-medium;
+  color: $gray-700;
+}
+
+.title-display {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  margin-bottom: $spacing-sm;
+  padding: $spacing-sm;
+  background: $bg-white;
+  border: $border-width solid $border-color-light;
+  border-radius: $border-radius-sm;
+  line-height: 1.4;
+  word-break: break-word;
+  color: $gray-800;
+}
+
+.url-display {
+  font-size: $font-size-xs;
+  color: $gray-500;
+  word-break: break-all;
+  background: $bg-gray;
+  padding: $spacing-sm;
+  border-radius: $border-radius-sm;
+  margin-top: $spacing-sm;
+  border: $border-width solid $border-color-light;
+  line-height: 1.4;
+}
+
+// 按钮样式 - 极简扁平按钮
+.popup-button {
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  border: $border-width solid transparent;
+  border-radius: $border-radius-md;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-base;
+  margin-bottom: $spacing-sm;
+  
+  &:focus {
+    outline: 2px solid $theme-accent;
+    outline-offset: 2px;
+  }
+  
+  // 主要按钮 - 成功状态
+  &.primary {
+    background: $bg-success;
+    color: white;
+    border-color: $bg-success;
+    
+    &:hover {
+      background: $theme-success-dark;
+      border-color: $theme-success-dark;
+    }
+    
+    // 未读状态 - 错误状态
+    &.unread {
+      background: $bg-error;
+      border-color: $bg-error;
+      
+      &:hover {
+        background: $theme-error-dark;
+        border-color: $theme-error-dark;
+      }
+    }
+  }
+  
+  // 次要按钮
+  &.secondary {
+    @include button-secondary;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+// 统计信息区域 - 简洁信息卡片
+.popup-stats {
+  margin-top: $spacing-md;
+  padding: $spacing-sm;
+  background: $bg-accent-light;
+  border: $border-width solid $theme-accent;
+  border-radius: $border-radius-md;
+  font-size: $font-size-xs;
+  text-align: center;
+  color: $theme-accent-dark;
+  
+  span {
+    font-weight: $font-weight-semibold;
+    color: $theme-accent-dark;
+  }
+}
+
+// 加载动画
+.loading {
+  @include loading-pulse;
+}
+
+// 移动端适配
+@include mobile {
+  body {
+    width: 300px;
+    padding: $spacing-sm;
+  }
+  
+  .popup-container {
+    padding: $spacing-md;
+  }
+  
+  .popup-header h1 {
+    font-size: $font-size-lg;
+  }
+} 

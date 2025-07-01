@@ -8,8 +8,9 @@
 - 🔍 **视觉指示**: 在已读网页右上角显示"已读"标记
 - 📊 **统计信息**: 查看总计已读页面数量
 - 🔄 **实时同步**: 使用Chrome同步存储，数据在不同设备间同步
-- 🎨 **现代界面**: 美观的渐变色界面设计
+- 🎨 **极简扁平**: 全新的极简扁平化设计，零视觉疲劳
 - 📱 **响应式**: 适配不同尺寸的屏幕
+- 🛠️ **SCSS架构**: 模块化的样式管理，便于维护和扩展
 
 ## 🚀 安装方法
 
@@ -46,23 +47,88 @@
 - **Manifest V3**: 使用最新的Chrome扩展API
 - **存储同步**: 使用`chrome.storage.sync`实现跨设备同步
 - **内容脚本**: 在网页中注入已读指示器
-- **现代样式**: CSS3渐变、动画和响应式设计
+- **SCSS架构**: 模块化的样式管理，支持主题变量和mixins
+- **极简扁平**: 极简扁平化设计，移除渐变和复杂效果，专注内容
+- **响应式设计**: 适配不同尺寸和分辨率的屏幕
 
 ## 📁 项目结构
 
 ```
-mark_as_read/
+Mark as Read/
 ├── manifest.json          # 插件配置文件
-├── popup.html             # 弹窗界面
-├── popup.js               # 弹窗逻辑
-├── content.js             # 内容脚本
-├── background.js          # 后台脚本
-├── styles.css             # 样式文件
-├── icons/                 # 图标文件夹
+├── package.json           # 依赖管理文件
+├── src/
+│   ├── popup/
+│   │   ├── popup.html     # 弹窗界面
+│   │   ├── popup.js       # 弹窗逻辑
+│   │   └── popup.css      # 弹窗样式（SCSS编译生成）
+│   ├── history/
+│   │   ├── history.html   # 历史页面
+│   │   ├── history.js     # 历史页面逻辑
+│   │   └── history.css    # 历史页面样式（SCSS编译生成）
+│   ├── content/
+│   │   ├── content.js     # 内容脚本
+│   │   └── styles.css     # 内容脚本样式（SCSS编译生成）
+│   ├── background/
+│   │   └── background.js  # 后台脚本
+│   └── styles/            # SCSS源文件
+│       ├── themes/
+│       │   └── _variables.scss    # 主题变量
+│       ├── base/
+│       │   └── _mixins.scss       # 通用mixins
+│       ├── components/
+│       │   ├── _popup.scss        # 弹窗组件样式
+│       │   ├── _history.scss      # 历史页面组件样式
+│       │   └── _content.scss      # 内容脚本组件样式
+│       ├── popup.scss     # 弹窗入口文件
+│       ├── history.scss   # 历史页面入口文件
+│       ├── content.scss   # 内容脚本入口文件
+│       └── main.scss      # 主样式入口
+├── assets/
+│   └── icons/             # 图标文件夹
+├── docs/
+│   └── design-system.md  # 设计系统文档
 └── README.md              # 说明文档
 ```
 
+## 🎨 极简扁平化设计
+
+本项目采用极简扁平化设计理念，详细信息请查看 [设计系统文档](docs/design-system.md)
+
+### 设计理念
+- **视觉简洁**: 移除所有不必要的装饰效果
+- **认知轻松**: 降低视觉复杂度，减少用户认知负担
+- **聚焦内容**: 让用户专注于核心功能，而非界面装饰
+- **持久舒适**: 适合长时间使用，零视觉疲劳
+
+### 实现特色
+- **纯色背景**: 移除所有渐变，使用简洁纯色
+- **清晰边框**: 用边框定义元素边界，替代复杂阴影
+- **高对比度**: 确保文字清晰易读
+- **统一间距**: 标准化的间距和尺寸系统
+
 ## 🔧 开发说明
+
+### 安装依赖
+
+```bash
+npm install
+```
+
+### 开发流程
+
+```bash
+# 开发模式（监听SCSS文件变化）
+npm run dev
+
+# 构建所有样式文件
+npm run build
+
+# 单独构建组件
+npm run build:scss:popup
+npm run build:scss:history
+npm run build:scss:content
+```
 
 ### 权限说明
 

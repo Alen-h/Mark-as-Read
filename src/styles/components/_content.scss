@@ -1,0 +1,86 @@
+// Mark as Read - Content Script 极简扁平化样式
+// 简洁、扁平的内容脚本指示器设计
+
+#mark-as-read-indicator {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: $z-content-script;
+  
+  // 使用简洁的绿色背景，移除渐变
+  background: $bg-success;
+  color: white;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-full;
+  border: $border-width solid $theme-success-dark;
+  
+  font-family: $font-family-base;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  
+  // 简化动画
+  animation: slideIn $transition-slow ease-out;
+  transition: all $transition-base;
+  
+  .indicator-content {
+    @include flex-center;
+    gap: $spacing-xs;
+  }
+  
+  .indicator-icon {
+    font-size: $font-size-base;
+  }
+  
+  .indicator-text {
+    font-weight: $font-weight-semibold;
+  }
+  
+  // 简化悬停效果
+  &:hover {
+    background: $theme-success-dark;
+    border-color: $theme-success-dark;
+    @include hover-lift-minimal;
+  }
+}
+
+// 简单的滑入动画
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// 响应式设计
+@include mobile {
+  #mark-as-read-indicator {
+    top: 10px;
+    right: 10px;
+    font-size: $font-size-xs;
+    padding: $spacing-xs $spacing-sm;
+  }
+}
+
+// 深色主题适配 - 保持简洁的深色版本
+body.dark-theme #mark-as-read-indicator,
+body[data-theme="dark"] #mark-as-read-indicator,
+html[data-theme="dark"] #mark-as-read-indicator {
+  background: $theme-success-dark;
+  border-color: $theme-success;
+  
+  &:hover {
+    background: $success-700;
+    border-color: $success-700;
+  }
+}
+
+// 确保在所有网站上都能正常显示的样式重置
+#mark-as-read-indicator * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} 

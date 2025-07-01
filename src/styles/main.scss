@@ -1,0 +1,132 @@
+// Mark as Read - 主要样式入口文件
+// 统一管理所有组件的样式，使用柔和色彩主题
+
+// === 主题和基础样式 ===
+@import 'themes/variables';
+@import 'base/mixins';
+
+// === 组件样式 ===
+// 根据需要引入各个组件的样式
+// 这些样式将被单独编译到对应的组件CSS文件中
+
+// 全局重置和基础样式
+* {
+  box-sizing: border-box;
+}
+
+// CSS 自定义属性，用于主题切换
+:root {
+  // 主要颜色
+  --color-primary: #{$theme-primary};
+  --color-primary-light: #{$theme-primary-light};
+  --color-primary-dark: #{$theme-primary-dark};
+  
+  // 强调色
+  --color-accent: #{$theme-accent};
+  --color-accent-light: #{$theme-accent-light};
+  --color-accent-dark: #{$theme-accent-dark};
+  
+  // 功能色
+  --color-success: #{$theme-success};
+  --color-success-light: #{$theme-success-light};
+  --color-success-dark: #{$theme-success-dark};
+  
+  --color-error: #{$theme-error};
+  --color-error-light: #{$theme-error-light};
+  --color-error-dark: #{$theme-error-dark};
+  
+  // 中性色
+  --color-gray-50: #{$gray-50};
+  --color-gray-100: #{$gray-100};
+  --color-gray-200: #{$gray-200};
+  --color-gray-300: #{$gray-300};
+  --color-gray-400: #{$gray-400};
+  --color-gray-500: #{$gray-500};
+  --color-gray-600: #{$gray-600};
+  --color-gray-700: #{$gray-700};
+  --color-gray-800: #{$gray-800};
+  --color-gray-900: #{$gray-900};
+  
+  // 渐变
+  --gradient-primary: #{$gradient-primary};
+  --gradient-soft: #{$gradient-soft};
+  --gradient-card: #{$gradient-card};
+  
+  // 阴影
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  --shadow-xl: #{$shadow-xl};
+  
+  // 尺寸
+  --border-radius-sm: #{$border-radius-sm};
+  --border-radius-md: #{$border-radius-md};
+  --border-radius-lg: #{$border-radius-lg};
+  --border-radius-xl: #{$border-radius-xl};
+  --border-radius-full: #{$border-radius-full};
+  
+  // 字体
+  --font-family-base: #{$font-family-base};
+  --font-size-xs: #{$font-size-xs};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-base: #{$font-size-base};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+  
+  // 过渡动画
+  --transition-fast: #{$transition-fast};
+  --transition-base: #{$transition-base};
+  --transition-slow: #{$transition-slow};
+}
+
+// 通用工具类
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.font-medium { font-weight: $font-weight-medium; }
+.font-semibold { font-weight: $font-weight-semibold; }
+.font-bold { font-weight: $font-weight-bold; }
+
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.opacity-90 { opacity: 0.9; }
+
+// 响应式工具类
+.hidden-mobile {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+.hidden-desktop {
+  @include desktop {
+    display: none !important;
+  }
+}
+
+.visible-mobile {
+  display: none;
+  @include mobile {
+    display: block !important;
+  }
+}
+
+.visible-desktop {
+  display: none;
+  @include desktop {
+    display: block !important;
+  }
+} 
