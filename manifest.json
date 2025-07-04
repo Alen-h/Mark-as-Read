@@ -6,7 +6,8 @@
   "permissions": [
     "storage",
     "activeTab",
-    "tabs"
+    "tabs",
+    "notifications"
   ],
   "host_permissions": [
     "http://*/*",
@@ -37,5 +38,10 @@
     "32": "assets/icons/icon32.png",
     "48": "assets/icons/icon48.png",
     "128": "assets/icons/icon128.png"
+  },
+  "commands": {
+    "mark-as-read": {
+      "description": "Mark or unmark current page."
+    }
   }
 } 

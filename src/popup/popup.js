@@ -142,6 +142,15 @@ document.addEventListener('DOMContentLoaded', async function() {
         chrome.tabs.create({ url: chrome.runtime.getURL('src/history/history.html') });
     });
     
+    // Bind shortcut settings link event
+    const shortcutSettingsLink = document.getElementById('shortcutSettingsLink');
+    shortcutSettingsLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+        // Close popup after clicking
+        window.close();
+    });
+    
     // Initialize
     init();
 }); 

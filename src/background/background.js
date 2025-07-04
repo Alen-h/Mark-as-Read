@@ -89,4 +89,64 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === 'complete' && tab.url) {
         // Can add automatic checking logic here
     }
+});
+
+// Handle keyboard shortcuts
+chrome.commands.onCommand.addListener(async (command) => {
+    if (command === 'mark-as-read') {
+        try {
+            // Get current active tab
+            const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+            
+            if (!tab || !tab.url) {
+                console.error('No active tab found');
+                return;
+            }
+            
+            const currentUrl = tab.url;
+            const currentTitle = tab.title || 'Untitled';
+            const normalizedUrl = normalizeUrl(currentUrl);
+            
+            // Get current read status
+            const result = await chrome.storage.sync.get(['readUrls']);
+            const readUrls = result.readUrls || {};
+            const isRead = !!readUrls[normalizedUrl];
+            
+            // Toggle read status
+            if (isRead) {
+                // Unmark as read
+                delete readUrls[normalizedUrl];
+                console.log('Unmarked as read:', normalizedUrl);
+            } else {
+                // Mark as read
+                readUrls[normalizedUrl] = {
+                    title: currentTitle,
+                    timestamp: Date.now(),
+                    domain: new URL(currentUrl).hostname,
+                    originalUrl: currentUrl
+                };
+                console.log('Marked as read:', normalizedUrl);
+            }
+            
+            // Save to storage
+            await chrome.storage.sync.set({ readUrls });
+            
+            // Notify content script to update display
+            chrome.tabs.sendMessage(tab.id, { 
+                action: 'updateReadStatus', 
+                isRead: !isRead 
+            });
+            
+            // Show notification (optional)
+            chrome.notifications.create({
+                type: 'basic',
+                iconUrl: 'assets/icons/icon48.png',
+                title: 'Mark as Read',
+                message: isRead ? 'Page unmarked as read' : 'Page marked as read'
+            });
+            
+        } catch (error) {
+            console.error('Failed to execute mark-as-read command:', error);
+        }
+    }
 }); 
