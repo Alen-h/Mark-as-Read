@@ -6,177 +6,64 @@ alwaysApply: true
 # Mark as Read Chrome Extension - Development Rules
 
 ## 🌍 Language Requirements
-
-### Product Language: ENGLISH ONLY
-- All user-facing text, UI labels, buttons, messages, and notifications MUST be in English
-- HTML elements, popup text, status messages, and user interactions MUST use English
-- Error messages and user feedback MUST be in English
-- Extension name, descriptions, and user documentation MUST be in English
-
-### Code Comments: CHINESE ONLY
-- All code comments MUST be written in Chinese (中文)
-- Function descriptions, variable explanations, and inline comments MUST use Chinese
-- Code documentation and technical notes MUST be in Chinese
-- TODO comments and development notes MUST be in Chinese
-- Debug prints (such as console.log) MAY use English for convenience - only code comments are required to be in Chinese
+**ALL CONTENT MUST BE IN ENGLISH** - UI text, code comments, documentation, error messages, variable names, and all other text.
 
 ## 🏗️ Project Architecture
 
-### File Structure Standards
+### File Structure
 ```
 Mark as Read/
-├── manifest.json          # 扩展配置清单
-├── popup.html/css/js      # 弹出窗口界面组件
-├── background.js          # 后台服务工作脚本
-├── content.js             # 内容脚本注入
-├── history.html/css/js    # 历史记录页面组件
-├── styles.css             # 全局样式文件
-└── icons/                 # 图标资源文件夹
+├── manifest.json          # Extension configuration
+├── popup.html/css/js      # Popup interface components
+├── background.js          # Background service worker
+├── content.js             # Content script injection
+├── history.html/css/js    # History page components
+├── styles.css             # Global stylesheet
+└── icons/                 # Icon assets
 ```
 
-### Chrome Extension Best Practices
-- Use Manifest V3 standards and APIs
-- Implement proper permission requests and security practices
-- Follow Chrome Web Store policy guidelines
-- Ensure cross-browser compatibility where applicable
+### Chrome Extension Standards
+- Use Manifest V3 APIs
+- Implement proper permissions and security practices
+- Follow Chrome Web Store guidelines
+- Ensure cross-browser compatibility
 
 ## 💻 Development Guidelines
 
-### JavaScript Development
+### Core Features
+- **Page Marking**: One-click page marking with confirmation messages
+- **Visual Indicators**: Show "READ" badges on marked pages
+- **Statistics**: Display read count ("Total Read: X pages")
+- **History Management**: History page with proper navigation
+- **Sync Storage**: Use Chrome sync storage with error handling
+
+### Code Quality
 ```javascript
-// ✅ CORRECT: English UI text with Chinese comments
-function markPageAsRead(url, title) {
-    // 标记页面为已读状态，保存到chrome存储
-    const pageData = {
-        title: title,
-        timestamp: Date.now(),
-        domain: new URL(url).hostname
-    };
-    
-    // 显示英文成功消息给用户
-    showNotification("Page marked as read successfully!");
-}
-
-// ❌ INCORRECT: Chinese UI text
-function markPageAsRead(url, title) {
-    showNotification("页面已标记为已读！"); // Wrong language for UI
-}
-```
-
-### HTML/UI Components
-```html
-<!-- ✅ CORRECT: English UI labels -->
-<button id="actionButton" class="popup-button primary">
-    Mark as Read
-</button>
-<div class="popup-stats">
-    <div>Total Read: <span id="totalRead">0</span> pages</div>
-</div>
-
-<!-- ❌ INCORRECT: Chinese UI labels -->
-<button id="actionButton" class="popup-button primary">
-    标记为已读  <!-- Wrong language for UI -->
-</button>
-```
-
-### CSS Styling
-```css
-/* 正确示例：英文UI配合中文注释 */
-.popup-button {
-    /* 主要操作按钮的样式设计 */
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    /* 确保文字在渐变背景上清晰可见 */
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.status-success::after {
-    /* 成功状态的提示内容，显示英文给用户 */
-    content: "Successfully marked as read";
-}
-```
-
-## 🎯 Functional Requirements
-
-### Core Features Implementation
-- **Page Marking**: Implement one-click page marking with English confirmation messages
-- **Visual Indicators**: Show "READ" badges on marked pages (English text)
-- **Statistics**: Display read count with English labels ("Total Read: X pages")
-- **History Management**: History page with English headings and navigation
-- **Sync Storage**: Use Chrome sync storage with proper error handling
-
-### User Experience Standards
-- All buttons, menus, and interactive elements use English text
-- Error messages and tooltips display in English
-- Status indicators and feedback messages in English
-- Keyboard shortcuts and accessibility labels in English
-
-## 📝 Code Quality Standards
-
-### Comment Requirements
-```javascript
-// 函数用于获取当前标签页的URL和标题
+// Use descriptive English names and comments
 async function getCurrentTabInfo() {
     try {
-        // 查询当前活跃的标签页
         const [tab] = await chrome.tabs.query({active: true, currentWindow: true});
-        
-        // 返回页面基本信息用于标记处理
-        return {
-            url: tab.url,
-            title: tab.title,
-            id: tab.id
-        };
+        return { url: tab.url, title: tab.title, id: tab.id };
     } catch (error) {
-        // 错误处理：记录获取标签页信息失败
-        console.error('获取标签页信息失败:', error);
+        console.error('Failed to get tab information:', error);
         throw error;
     }
 }
 ```
 
 ### Variable Naming
-- Use English for variable names, function names, and identifiers
-- Use descriptive English names: `markAsReadButton`, `totalReadCount`, `pageHistory`
-- Avoid Chinese characters in code identifiers
-
-### Error Handling
-```javascript
-// 错误处理示例：中文注释，英文用户消息
-try {
-    // 尝试保存页面标记数据
-    await savePageMark(pageData);
-    showSuccessMessage("Page marked as read!"); // 英文用户消息
-} catch (error) {
-    // 处理保存失败的情况
-    console.error('保存页面标记失败:', error); // 中文日志注释
-    showErrorMessage("Failed to mark page. Please try again."); // 英文错误消息
-}
-```
+Use descriptive English names: `markAsReadButton`, `totalReadCount`, `pageHistory`
 
 ## 🔧 Development Workflow
 
-### Testing Requirements
-- Test all English UI text for proper grammar and clarity
-- Verify Chinese comments are accurate and helpful
-- Test extension functionality across different websites
-- Validate manifest.json configuration
-
 ### Code Review Checklist
-- [ ] All user-facing text is in English
-- [ ] All code comments are in Chinese
 - [ ] Chrome extension APIs used correctly
-- [ ] Proper error handling with English user messages
-- [ ] Responsive design works across different screen sizes
-- [ ] Data storage and sync functionality working properly
-
-## 🚀 Deployment Guidelines
+- [ ] Proper error handling implemented
+- [ ] Responsive design works across screen sizes
+- [ ] Data storage and sync functionality working
 
 ### Pre-deployment Checks
-- Validate all English text for grammar and spelling
-- Ensure Chinese comments are comprehensive and accurate
-- Test extension installation and uninstallation process
-- Verify icon assets and manifest configuration
-- Check Chrome Web Store compliance
-
-Remember: The user sees English, the developer reads Chinese comments! 
+- [ ] Test extension functionality across different websites
+- [ ] Validate manifest.json configuration
+- [ ] Verify icon assets and Chrome Web Store compliance
+- [ ] Test installation and uninstallation process

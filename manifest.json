@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Mark as Read",
   "version": "1.0.0",
-  "description": "Keep track of your web browsing with visual indicators. Mark pages as read, view browsing history, and sync across devices. Perfect for researchers, students, and avid readers who want to organize their online reading progress.",
+  "description": "A simple and efficient Chrome extension to help you mark and track visited web pages.",
   "permissions": [
     "storage",
     "activeTab",

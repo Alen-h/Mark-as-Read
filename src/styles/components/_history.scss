@@ -1,7 +1,7 @@
-// Mark as Read - History 现代卡片式布局
-// 极简、扁平、高度可用的历史页面设计
+// Mark as Read - History modern card layout
+// Minimal, flat, highly usable history page design
 
-// 基础样式重置
+// Base style reset
 * {
   box-sizing: border-box;
   margin: 0;
@@ -17,14 +17,14 @@ body {
   line-height: 1.6;
 }
 
-// 主容器 - 简洁白色卡片
+// Main container - clean white card
 .history-container {
   max-width: 1200px;
   margin: 0 auto;
   @include card-flat;
 }
 
-// 头部 - 简洁的主色调背景
+// Header - clean primary color background
 .history-header {
   @include container-primary;
   padding: $spacing-xl;
@@ -44,7 +44,7 @@ body {
   color: rgba(255, 255, 255, 0.9);
 }
 
-// 控制区域
+// Control area
 .history-controls {
   padding: $spacing-xl;
   border-bottom: $border-width solid $border-color;
@@ -91,12 +91,12 @@ body {
   }
 }
 
-// 内容区域
+// Content area
 .history-content {
   min-height: 400px;
 }
 
-// 加载状态
+// Loading state
 .loading-state {
   text-align: center;
   padding: $spacing-2xl $spacing-lg;
@@ -111,11 +111,11 @@ body {
   border: 2px solid $border-color;
   border-bottom-color: $theme-primary;
   border-radius: 50%;
-  @include loading-spin;
+  @include fade-in;
   margin-bottom: $spacing-sm;
 }
 
-// 空状态
+// Empty state
 .empty-state {
   text-align: center;
   padding: $spacing-2xl $spacing-lg;
@@ -146,7 +146,7 @@ body {
   font-weight: $font-weight-medium;
 }
 
-// 历史记录列表
+// History record list
 .history-list {
   padding: $spacing-lg;
   display: grid;
@@ -159,7 +159,7 @@ body {
   }
 }
 
-// 历史记录卡片
+// History record card
 .history-card {
   @include card-flat;
   padding: 0;
@@ -177,14 +177,14 @@ body {
     transform: translateY(0);
   }
   
-  &.removing {
+  &.animate-out {
     opacity: 0;
     transform: translateX(-100%);
     transition: all 0.3s ease-in;
   }
 }
 
-// 卡片头部
+// Card header
 .card-header {
   display: flex;
   align-items: flex-start;
@@ -198,55 +198,60 @@ body {
   min-width: 0;
   
   h3 {
+    margin: 0 0 $spacing-xs 0;
     font-size: $font-size-lg;
     font-weight: $font-weight-semibold;
-    color: $gray-800;
-    margin: 0 0 $spacing-xs 0;
-    @include text-clamp(2);
+    color: $gray-900;
     line-height: 1.4;
+    @include text-truncate;
   }
 }
 
 .domain-badge {
   display: inline-block;
   padding: $spacing-xs $spacing-sm;
-  background: $theme-accent-light;
-  color: $theme-accent-dark;
+  background: $bg-primary-light;
+  color: $theme-primary;
   border-radius: $border-radius-full;
   font-size: $font-size-xs;
   font-weight: $font-weight-medium;
-  border: $border-width solid $theme-accent;
+  border: $border-width solid $theme-primary;
 }
 
 .card-actions {
-  flex-shrink: 0;
-  margin-left: $spacing-md;
+  margin-left: $spacing-sm;
 }
 
 .remove-button {
-  @include button-base;
-  background: transparent;
-  color: $gray-400;
   padding: $spacing-xs;
-  border-radius: $border-radius-sm;
-  border-color: transparent;
+  background: transparent;
+  border: $border-width solid $border-color;
+  border-radius: $border-radius-md;
+  color: $gray-400;
+  cursor: pointer;
+  transition: all $transition-base;
   display: flex;
   align-items: center;
   justify-content: center;
   
   &:hover {
-    background: $theme-error-light;
-    color: $theme-error;
+    background: $bg-error;
     border-color: $theme-error;
+    color: white;
+  }
+  
+  &:focus {
+    outline: 2px solid $theme-error;
+    outline-offset: 2px;
   }
   
   svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 }
 
-// 卡片内容
+// Card content
 .card-content {
   padding: 0 $spacing-lg $spacing-md $spacing-lg;
 }
@@ -259,39 +264,36 @@ body {
   color: $theme-accent;
   text-decoration: none;
   font-size: $font-size-sm;
-  font-family: monospace;
   word-break: break-all;
-  transition: color $transition-fast;
+  line-height: 1.5;
   
   &:hover {
-    color: $theme-accent-dark;
     text-decoration: underline;
+    color: $theme-accent-dark;
   }
 }
 
 .url-details {
+  margin-top: $spacing-sm;
   display: flex;
   flex-wrap: wrap;
   gap: $spacing-xs;
-  margin-top: $spacing-xs;
 }
 
 .url-param {
   font-size: $font-size-xs;
-  color: $gray-600;
+  color: $gray-500;
   background: $bg-gray;
   padding: $spacing-xs $spacing-sm;
   border-radius: $border-radius-sm;
-  font-family: monospace;
-  border: $border-width solid $border-color;
+  border: $border-width solid $border-color-light;
 }
 
-// 卡片底部
+// Card footer
 .card-footer {
-  padding: $spacing-md $spacing-lg;
+  padding: $spacing-sm $spacing-lg $spacing-lg $spacing-lg;
+  border-top: $border-width solid $bg-gray;
   background: $bg-gray-light;
-  border-top: $border-width solid $border-color;
-  border-radius: 0 0 $border-radius-md $border-radius-md;
 }
 
 .time-text {
@@ -300,7 +302,12 @@ body {
   font-weight: $font-weight-medium;
 }
 
-// 动画
+// Hidden state
+.hidden {
+  display: none !important;
+}
+
+// Animations
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -312,19 +319,10 @@ body {
   }
 }
 
-// 工具类
-.hidden {
-  display: none;
-}
-
-// 响应式设计 
+// Mobile responsive
 @include mobile {
   body {
     padding: $spacing-md;
-  }
-  
-  .history-container {
-    border-radius: $border-radius-md;
   }
   
   .history-header {
@@ -336,12 +334,7 @@ body {
   }
   
   .history-controls {
-    padding: $spacing-md;
-  }
-  
-  .sort-button {
-    font-size: $font-size-xs;
-    padding: $spacing-xs $spacing-sm;
+    padding: $spacing-lg;
   }
   
   .history-list {
@@ -350,27 +343,18 @@ body {
   }
   
   .card-header {
-    padding: $spacing-md;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: $spacing-sm;
-  }
-  
-  .card-actions {
-    margin-left: 0;
-    align-self: flex-end;
+    padding: $spacing-md $spacing-md $spacing-sm $spacing-md;
   }
   
   .card-content {
-    padding: 0 $spacing-md $spacing-md $spacing-md;
+    padding: 0 $spacing-md $spacing-sm $spacing-md;
   }
   
   .card-footer {
-    padding: $spacing-sm $spacing-md;
+    padding: $spacing-sm $spacing-md $spacing-md $spacing-md;
   }
   
-  .domain-badge {
-    font-size: $font-size-xs;
-    padding: 2px $spacing-xs;
+  .sort-controls {
+    justify-content: center;
   }
 } 

@@ -8,24 +8,24 @@ document.addEventListener('DOMContentLoaded', async function() {
     let readUrls = {};
     let currentSort = 'time-desc';
     
-    // 获取已读URL列表
+    // Get read URLs list
     async function getReadUrls() {
         const result = await chrome.storage.sync.get(['readUrls']);
         return result.readUrls || {};
     }
     
-    // 保存已读URL列表
+    // Save read URLs list
     async function saveReadUrls(urls) {
         await chrome.storage.sync.set({ readUrls: urls });
     }
     
-    // 限制文本长度并添加省略号
+    // Limit text length and add ellipsis
     function truncateText(text, maxLength = 50) {
         if (!text) return '';
         return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
     }
     
-    // 格式化时间
+    // Format time
     function formatTime(timestamp) {
         const date = new Date(timestamp);
         const now = new Date();
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
     
-    // 解析URL获取各个部分
+    // Parse URL to get various parts
     function parseUrl(url) {
         try {
             const urlObj = new URL(url);
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
     
-    // 排序数据
+    // Sort data
     function sortData(data, sortType) {
         const entries = Object.entries(data);
         
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
     
-    // 创建历史记录卡片
+    // Create history card
     function createHistoryCard(normalizedUrl, data) {
         const urlInfo = parseUrl(data.originalUrl || normalizedUrl);
         const titleText = data.title || 'Untitled';
@@ -147,14 +147,14 @@ document.addEventListener('DOMContentLoaded', async function() {
             </div>
         `;
         
-        // 绑定删除按钮事件
+        // Bind remove button event
         const removeButton = card.querySelector('.remove-button');
         removeButton.addEventListener('click', handleRemoveClick);
         
         return card;
     }
     
-    // 渲染历史列表
+    // Render history list
     function renderHistory() {
         const sortedEntries = sortData(readUrls, currentSort);
         
@@ -171,16 +171,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         historyList.classList.remove('hidden');
         totalCountSpan.textContent = sortedEntries.length;
         
-        // 清空列表内容
+        // Clear list content
         historyList.innerHTML = '';
         
-        // 创建卡片
+        // Create cards
         sortedEntries.forEach(([normalizedUrl, data]) => {
             const card = createHistoryCard(normalizedUrl, data);
             historyList.appendChild(card);
         });
         
-        // 添加入场动画
+        // Add entrance animation
         setTimeout(() => {
             const cards = historyList.querySelectorAll('.history-card');
             cards.forEach((card, index) => {
@@ -191,17 +191,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         }, 50);
     }
     
-    // 处理删除按钮点击
+    // Handle remove button click
     async function handleRemoveClick(event) {
         const button = event.currentTarget;
         const normalizedUrl = button.dataset.url;
         
         if (confirm('Are you sure you want to remove this page from your read history?')) {
-            // 添加删除动画
+            // Add removal animation
             const card = button.closest('.history-card');
-            card.classList.add('removing');
+            card.classList.add('animate-out');
             
-            // 等待动画完成后删除
             setTimeout(async () => {
                 delete readUrls[normalizedUrl];
                 await saveReadUrls(readUrls);
@@ -210,38 +209,43 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
     
-    // 初始化
+    // Handle sort button click
+    function handleSortClick(event) {
+        const button = event.currentTarget;
+        const sortType = button.dataset.sort;
+        
+        if (sortType === currentSort) return;
+        
+        // Update button states
+        sortButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        currentSort = sortType;
+        renderHistory();
+    }
+    
+    // Initialize
     async function init() {
         try {
             readUrls = await getReadUrls();
             renderHistory();
+            
+            // Bind sort button events
+            sortButtons.forEach(button => {
+                button.addEventListener('click', handleSortClick);
+            });
+            
+            // Set initial sort button state
+            document.querySelector(`[data-sort="${currentSort}"]`).classList.add('active');
+            
         } catch (error) {
-            console.error('Failed to load history:', error);
-            loadingDiv.innerHTML = '<div class="error-message">Failed to load history. Please refresh and try again.</div>';
+            console.error('Failed to initialize history page:', error);
+            loadingDiv.classList.add('hidden');
+            emptyStateDiv.classList.remove('hidden');
+            document.querySelector('.empty-message').textContent = 'Failed to load history data';
         }
     }
     
-    // 绑定排序按钮事件
-    sortButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // 更新按钮状态
-            sortButtons.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            
-            // 更新排序方式并重新渲染
-            currentSort = this.dataset.sort;
-            renderHistory();
-        });
-    });
-    
-    // 监听存储变化，自动更新页面
-    chrome.storage.onChanged.addListener((changes, namespace) => {
-        if (namespace === 'sync' && changes.readUrls) {
-            readUrls = changes.readUrls.newValue || {};
-            renderHistory();
-        }
-    });
-    
-    // 初始化
+    // Initialize page
     init();
 }); 

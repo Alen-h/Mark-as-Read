@@ -1,15 +1,15 @@
-# 依赖
+# Dependencies
 node_modules/
 npm-debug.log*
 
-# 构建产物
+# Build output
 dist/
 build/
 
-# SCSS 源文件产生的临时文件
+# SCSS generated temporary files
 *.css.map
 
-# 系统文件
+# System files
 .DS_Store
 .DS_Store?
 ._*
@@ -18,17 +18,17 @@ build/
 ehthumbs.db
 Thumbs.db
 
-# IDE 和编辑器
+# IDE and editors
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# 日志
+# Logs
 logs
 *.log
 
-# 临时文件
+# Temporary files
 tmp/
 temp/ 

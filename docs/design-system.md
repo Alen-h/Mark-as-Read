@@ -1,176 +1,165 @@
-# Mark as Read - 极简扁平化设计系统
+# Mark as Read - Minimal Flat Design System
 
-## 🎯 设计理念
+## 🎯 Design Philosophy
 
-本项目采用极简扁平化设计理念，追求：
-- **视觉简洁**：移除所有不必要的装饰效果
-- **认知轻松**：降低视觉复杂度，减少用户认知负担
-- **聚焦内容**：让用户专注于核心功能，而非界面装饰
-- **持久舒适**：适合长时间使用，不会造成视觉疲劳
+This project adopts minimal flat design principles:
+- **Visual Simplicity**: Remove all unnecessary decorative effects
+- **Cognitive Ease**: Reduce visual complexity and cognitive load
+- **Content Focus**: Help users focus on core functionality, not interface decoration
+- **Long-term Comfort**: Suitable for extended use with zero visual fatigue
 
-## 🎨 极简化改进
+## 🎨 Minimalist Improvements
 
-### 视觉复杂度大幅降低
-- ❌ **移除渐变**：所有渐变背景替换为纯色
-- ❌ **移除毛玻璃**：去除 backdrop-filter 和半透明效果
-- ❌ **简化阴影**：使用最小阴影或纯边框替代
-- ❌ **移除动效**：简化悬停和交互动画
+### Visual Complexity Reduction
+- ❌ **Remove Gradients**: All gradient backgrounds replaced with solid colors
+- ❌ **Remove Blur Effects**: No backdrop-filter or semi-transparent effects
+- ❌ **Simplify Shadows**: Use minimal shadows or borders instead
+- ❌ **Remove Complex Animations**: Simplified hover and interaction animations
 
-### 扁平化视觉元素
-- ✅ **纯色背景**：使用简洁的纯色背景
-- ✅ **清晰边框**：用边框定义元素边界
-- ✅ **高对比度**：确保文字清晰易读
-- ✅ **统一间距**：使用标准化的间距系统
+### Flat Visual Elements
+- ✅ **Solid Backgrounds**: Use clean solid color backgrounds
+- ✅ **Clear Borders**: Use borders to define element boundaries
+- ✅ **High Contrast**: Ensure text is clearly readable
+- ✅ **Unified Spacing**: Use standardized spacing system
 
-## 🎯 颜色体系
+## 🎯 Color System
 
-### 主色调（简洁蓝灰色）
+### Primary Colors (Blue-Gray)
 ```scss
-$primary-500: #64748b;   // 主色调
-$primary-100: #f1f5f9;   // 浅色背景
-$primary-700: #334155;   // 深色文字
+$primary-500: #64748b;   // Main color
+$primary-100: #f1f5f9;   // Light background
+$primary-700: #334155;   // Dark text
 ```
 
-### 强调色（标准蓝色）
+### Accent Colors (Standard Blue)
 ```scss
-$accent-500: #3b82f6;    // 强调色
-$accent-100: #dbeafe;    // 浅色背景
-$accent-700: #1d4ed8;    // 深色状态
+$accent-500: #3b82f6;    // Accent color
+$accent-100: #dbeafe;    // Light background
+$accent-700: #1d4ed8;    // Dark state
 ```
 
-### 功能色（标准色彩）
+### Functional Colors
 ```scss
-$success-500: #22c55e;   // 成功色
-$error-500: #ef4444;     // 错误色
-$warning-500: #f59e0b;   // 警告色
+$success-500: #22c55e;   // Success
+$error-500: #ef4444;     // Error
+$warning-500: #f59e0b;   // Warning
 ```
 
-## 📐 极简设计 Tokens
+## 📐 Design Tokens
 
-### 背景系统
+### Background System
 ```scss
-$bg-white: #ffffff;      // 主要背景
-$bg-gray-light: #f9fafb; // 次要背景
-$bg-gray: #f3f4f6;       // 区域背景
-$bg-primary: #64748b;    // 主色背景
-$bg-success: #22c55e;    // 成功背景
-$bg-error: #ef4444;      // 错误背景
+$bg-white: #ffffff;      // Primary background
+$bg-gray-light: #f9fafb; // Secondary background
+$bg-gray: #f3f4f6;       // Section background
+$bg-primary: #64748b;    // Primary background
+$bg-success: #22c55e;    // Success background
+$bg-error: #ef4444;      // Error background
 ```
 
-### 边框系统
+### Border System
 ```scss
 $border-width: 1px;
-$border-color: #e5e7eb;      // 标准边框
-$border-color-light: #f3f4f6; // 浅色边框
-$border-color-dark: #d1d5db;  // 深色边框
+$border-color: #e5e7eb;      // Standard border
+$border-color-light: #f3f4f6; // Light border
+$border-color-dark: #d1d5db;  // Dark border
 ```
 
-### 极简阴影
+### Minimal Shadows
 ```scss
-$shadow-none: none;                           // 无阴影
-$shadow-minimal: 0 1px 2px 0 rgba(0,0,0,0.05); // 最小阴影
-$shadow-card: 0 4px 6px -1px rgba(0,0,0,0.1);  // 卡片阴影
+$shadow-none: none;                           // No shadow
+$shadow-minimal: 0 1px 2px 0 rgba(0,0,0,0.05); // Minimal shadow
+$shadow-card: 0 4px 6px -1px rgba(0,0,0,0.1);  // Card shadow
 ```
 
-## 🏗️ 极简组件设计
+## 🏗️ Component Design
 
-### 弹出窗口
-- **背景**：纯白色卡片 + 简洁边框
-- **状态区域**：浅灰背景 + 彩色状态边框
-- **按钮**：纯色背景 + 清晰边框
-- **统计区域**：蓝色背景 + 深色文字
+### Popup Window
+- **Background**: Pure white card with clean border
+- **Status Area**: Light gray background with colored status border
+- **Buttons**: Solid background with clear borders
+- **Statistics**: Blue background with dark text
 
 ```scss
-// 主容器
+// Main container
 .popup-container {
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
 }
 
-// 状态区域
+// Status area
 .popup-status.read {
-  background: #dcfce7;  // 绿色浅背景
-  color: #16a34a;       // 绿色深文字
+  background: #dcfce7;  // Light green background
+  color: #16a34a;       // Dark green text
   border: 1px solid #22c55e;
 }
 ```
 
-### 历史页面
-- **头部**：主色调纯色背景
-- **控制区域**：浅灰色背景
-- **表格**：白色背景 + 边框分隔
-- **交互元素**：简洁悬停效果
+### History Page
+- **Header**: Primary color solid background
+- **Controls**: Light gray background
+- **Table**: White background with border separation
+- **Interactive Elements**: Simple hover effects
 
-### 内容指示器
-- **背景**：成功色纯色背景
-- **边框**：深色边框定义边界
-- **动画**：简单滑入效果
-- **悬停**：颜色变化 + 微小位移
+### Content Indicator
+- **Background**: Success color solid background
+- **Border**: Dark border to define boundaries
+- **Animation**: Simple slide-in effect
+- **Hover**: Color change with minimal movement
 
-## 🎨 设计对比
+## 🌟 Design Advantages
 
-### 优化前 vs 优化后
+### 1. Visual Comfort
+- ✅ **Zero Visual Fatigue**: Removes all stimulating visual effects
+- ✅ **Content Focus**: Interface doesn't distract from user attention
+- ✅ **Long-term Usage**: Suitable for frequent daily use
 
-| 元素 | 优化前 | 优化后 |
-|------|--------|--------|
-| 主容器 | 复杂渐变 + 毛玻璃 | 纯白背景 + 简洁边框 |
-| 按钮 | 渐变背景 + 阴影 | 纯色背景 + 边框 |
-| 状态区域 | 半透明 + 模糊 | 纯色背景 + 彩色边框 |
-| 指示器 | 渐变 + 大阴影 | 纯色 + 简洁边框 |
+### 2. Performance Optimization
+- ✅ **Efficient Rendering**: No complex CSS effects, fast rendering
+- ✅ **Strong Compatibility**: Doesn't depend on modern CSS features
+- ✅ **Resource Saving**: Smaller CSS files, faster loading
 
-## 🌟 设计优势
+### 3. Maintainability
+- ✅ **Clean Code**: Style code is easy to understand and modify
+- ✅ **Strong Consistency**: Unified design language
+- ✅ **Good Extensibility**: Easy to add new components
 
-### 1. 视觉舒适度
-- ✅ **零视觉疲劳**：移除所有刺激性视觉效果
-- ✅ **专注内容**：界面不会分散用户注意力
-- ✅ **长期使用**：适合日常频繁使用
+### 4. Accessibility
+- ✅ **High Contrast**: Ensures all users can read clearly
+- ✅ **Clear Boundaries**: Use borders to clearly define interactive areas
+- ✅ **Standardized**: Complies with web accessibility guidelines
 
-### 2. 性能优化
-- ✅ **渲染高效**：无复杂CSS效果，渲染速度快
-- ✅ **兼容性强**：不依赖现代CSS特性
-- ✅ **资源节省**：CSS文件更小，加载更快
+## 🛠️ Implementation Details
 
-### 3. 可维护性
-- ✅ **代码简洁**：样式代码易于理解和修改
-- ✅ **一致性强**：统一的设计语言
-- ✅ **扩展性好**：容易添加新组件
-
-### 4. 可访问性
-- ✅ **高对比度**：确保所有用户都能清晰阅读
-- ✅ **清晰边界**：用边框明确定义交互区域
-- ✅ **标准化**：符合Web可访问性指南
-
-## 🛠️ 实现细节
-
-### CSS 架构
+### CSS Architecture
 ```
 src/styles/
-├── themes/_variables.scss    # 极简主题变量
-├── base/_mixins.scss        # 扁平化mixins
-├── components/              # 组件样式
-│   ├── _popup.scss         # 极简弹窗
-│   ├── _history.scss       # 扁平历史页
-│   └── _content.scss       # 简洁指示器
+├── themes/_variables.scss    # Minimal theme variables
+├── base/_mixins.scss        # Flat design mixins
+├── components/              # Component styles
+│   ├── _popup.scss         # Minimal popup
+│   ├── _history.scss       # Flat history page
+│   └── _content.scss       # Clean indicator
 ```
 
-### 核心Mixins
+### Core Mixins
 ```scss
-// 扁平卡片
+// Flat card
 @mixin card-flat {
   background: $bg-white;
   border: $border-width solid $border-color;
   border-radius: $border-radius-lg;
 }
 
-// 极简按钮
+// Minimal button
 @mixin button-primary {
   background: $bg-success;
   color: white;
   border: $border-width solid $bg-success;
 }
 
-// 状态样式
+// Status styles
 @mixin state-success {
   background: $theme-success-light;
   color: $theme-success-dark;
@@ -178,43 +167,42 @@ src/styles/
 }
 ```
 
-## 🚀 使用指南
+## 🚀 Usage Guide
 
-### 开发命令
+### Development Commands
 ```bash
-# 开发模式
+# Development mode
 npm run dev
 
-# 构建所有样式
+# Build all styles
 npm run build
 
-# 单独构建
+# Build individually
 npm run build:scss:popup
 npm run build:scss:history
 npm run build:scss:content
 ```
 
-### 添加新组件
-1. 遵循极简扁平化原则
-2. 使用纯色背景和边框
-3. 避免渐变、阴影、半透明
-4. 保持高对比度
+### Adding New Components
+1. Follow minimal flat design principles
+2. Use solid backgrounds and borders
+3. Avoid gradients, shadows, and transparency
 
-### 颜色使用原则
-- **背景**：使用 `$bg-*` 变量
-- **文字**：使用 `$gray-*` 变量确保对比度
-- **边框**：使用 `$border-color-*` 变量
-- **状态**：使用 `$theme-*` 功能色
+### Color Usage Principles
+- **Background**: Use `$bg-*` variables
+- **Text**: Use `$gray-*` variables to ensure contrast
+- **Borders**: Use `$border-color-*` variables
+- **Status**: Use `$theme-*` functional colors
 
-## 📈 性能对比
+## 📈 Performance Comparison
 
-| 指标 | 优化前 | 优化后 | 改进 |
-|------|--------|--------|------|
-| CSS文件大小 | ~3.2KB | ~2.1KB | ⬇️ 34% |
-| 渲染复杂度 | 高 | 低 | ⬇️ 显著 |
-| 兼容性 | 现代浏览器 | 全部浏览器 | ⬆️ 100% |
-| 视觉疲劳度 | 中等 | 极低 | ⬇️ 90% |
+| Metric | Before Optimization | After Optimization | Improvement |
+|--------|-------------------|------------------|-------------|
+| CSS File Size | ~3.2KB | ~2.1KB | ⬇️ 34% |
+| Rendering Complexity | High | Low | ⬇️ Significant |
+| Compatibility | Modern Browsers | All Browsers | ⬆️ 100% |
+| Visual Fatigue | Medium | Very Low | ⬇️ 90% |
 
 ---
 
-**极简即是最终的精致** - 我们相信最好的设计是看不见的设计。 
+**Minimalism is the ultimate sophistication** - We believe the best design is invisible design. 

@@ -11,58 +11,58 @@ document.addEventListener('DOMContentLoaded', async function() {
     let normalizedUrl = '';
     let isRead = false;
     
-    // URL规范化函数 - 去掉query参数和fragment，只保留基础URL
+    // URL normalization function - remove query parameters and fragments, keep only base URL
     function normalizeUrl(url) {
         try {
             const urlObj = new URL(url);
-            // 只保留protocol, hostname, port, pathname，去掉search和hash
+            // Keep only protocol, hostname, port, pathname, remove search and hash
             return `${urlObj.protocol}//${urlObj.host}${urlObj.pathname}`;
         } catch (error) {
             console.error('Failed to normalize URL:', error, url);
-            return url; // 如果解析失败，返回原始URL
+            return url; // Return original URL if parsing fails
         }
     }
     
-    // 获取当前活动标签页的URL
+    // Get current active tab URL
     async function getCurrentTab() {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
         return tab;
     }
     
-    // 获取已读URL列表
+    // Get read URLs list
     async function getReadUrls() {
         const result = await chrome.storage.sync.get(['readUrls']);
         return result.readUrls || {};
     }
     
-    // 保存已读URL
+    // Save read URLs
     async function saveReadUrls(readUrls) {
         await chrome.storage.sync.set({ readUrls });
     }
     
-    // 初始化界面
+    // Initialize interface
     async function init() {
         try {
             const tab = await getCurrentTab();
             currentUrl = tab.url;
-            currentTitle = tab.title || 'Untitled'; // 获取当前标签页的标题
+            currentTitle = tab.title || 'Untitled'; // Get current tab title
             normalizedUrl = normalizeUrl(currentUrl);
             
-            // 调试信息
+            // Debug information
             console.log('Retrieved title:', currentTitle);
             console.log('Retrieved URL:', currentUrl);
             
-            // 显示当前标题（截取显示）
+            // Display current title (truncated)
             const displayTitle = currentTitle.length > 30 ? 
                 currentTitle.substring(0, 30) + '...' : currentTitle;
             titleDisplay.textContent = displayTitle;
             
-            // 显示当前URL（截取显示）
+            // Display current URL (truncated)
             const displayUrl = currentUrl.length > 50 ? 
                 currentUrl.substring(0, 50) + '...' : currentUrl;
             urlDisplay.textContent = displayUrl;
             
-            // 检查是否已读（使用规范化的URL）
+            // Check if already read (using normalized URL)
             const readUrls = await getReadUrls();
             isRead = !!readUrls[normalizedUrl];
             
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
     
-    // 更新界面状态
+    // Update interface status
     function updateUI() {
         if (isRead) {
             statusDiv.className = 'popup-status read';
@@ -90,29 +90,29 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
     
-    // 更新统计信息
+    // Update statistics
     async function updateStats() {
         const readUrls = await getReadUrls();
         const totalCount = Object.keys(readUrls).length;
         totalReadSpan.textContent = totalCount;
     }
     
-    // 切换已读状态
+    // Toggle read status
     async function toggleReadStatus() {
         try {
             const readUrls = await getReadUrls();
             
             if (isRead) {
-                // 取消标记（使用规范化的URL）
+                // Unmark (using normalized URL)
                 delete readUrls[normalizedUrl];
                 isRead = false;
             } else {
-                // 标记为已读（使用规范化的URL作为key）
+                // Mark as read (using normalized URL as key)
                 readUrls[normalizedUrl] = {
                     title: currentTitle,
                     timestamp: Date.now(),
                     domain: new URL(currentUrl).hostname,
-                    originalUrl: currentUrl // 保存原始URL用于参考
+                    originalUrl: currentUrl // Save original URL for reference
                 };
                 isRead = true;
             }
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             updateUI();
             updateStats();
             
-            // 通知content script更新显示
+            // Notify content script to update display
             const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
             chrome.tabs.sendMessage(tab.id, { 
                 action: 'updateReadStatus', 
@@ -133,15 +133,15 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
     
-    // 绑定事件
+    // Bind events
     actionButton.addEventListener('click', toggleReadStatus);
     
-    // 绑定查看历史按钮事件
+    // Bind view history button event
     const viewHistoryButton = document.getElementById('viewHistoryButton');
     viewHistoryButton.addEventListener('click', function() {
         chrome.tabs.create({ url: chrome.runtime.getURL('src/history/history.html') });
     });
     
-    // 初始化
+    // Initialize
     init();
 }); 

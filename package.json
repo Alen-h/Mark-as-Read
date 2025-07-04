@@ -1,7 +1,7 @@
 {
   "name": "mark-as-read",
   "version": "1.0.0",
-  "description": "一个简单易用的Chrome插件，帮助你标记和追踪已访问的网页。",
+  "description": "A simple and efficient Chrome extension to help you mark and track visited web pages.",
   "main": "index.js",
   "scripts": {
     "build:scss": "sass src/styles:src --style=compressed --no-source-map",

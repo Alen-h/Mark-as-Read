@@ -1,32 +1,32 @@
-// Mark as Read - 主要样式入口文件
-// 统一管理所有组件的样式，使用柔和色彩主题
+// Mark as Read - Main styles entry file
+// Unified management of all component styles, using minimal flat theme
 
-// === 主题和基础样式 ===
+// === Theme and base styles ===
 @import 'themes/variables';
 @import 'base/mixins';
 
-// === 组件样式 ===
-// 根据需要引入各个组件的样式
-// 这些样式将被单独编译到对应的组件CSS文件中
+// === Component styles ===
+// Import component styles as needed
+// These styles will be compiled separately to corresponding component CSS files
 
-// 全局重置和基础样式
+// Global reset and base styles
 * {
   box-sizing: border-box;
 }
 
-// CSS 自定义属性，用于主题切换
+// CSS custom properties for theme switching
 :root {
-  // 主要颜色
+  // Primary colors
   --color-primary: #{$theme-primary};
   --color-primary-light: #{$theme-primary-light};
   --color-primary-dark: #{$theme-primary-dark};
   
-  // 强调色
+  // Accent colors
   --color-accent: #{$theme-accent};
   --color-accent-light: #{$theme-accent-light};
   --color-accent-dark: #{$theme-accent-dark};
   
-  // 功能色
+  // Functional colors
   --color-success: #{$theme-success};
   --color-success-light: #{$theme-success-light};
   --color-success-dark: #{$theme-success-dark};
@@ -35,7 +35,7 @@
   --color-error-light: #{$theme-error-light};
   --color-error-dark: #{$theme-error-dark};
   
-  // 中性色
+  // Neutral colors
   --color-gray-50: #{$gray-50};
   --color-gray-100: #{$gray-100};
   --color-gray-200: #{$gray-200};
@@ -47,25 +47,19 @@
   --color-gray-800: #{$gray-800};
   --color-gray-900: #{$gray-900};
   
-  // 渐变
-  --gradient-primary: #{$gradient-primary};
-  --gradient-soft: #{$gradient-soft};
-  --gradient-card: #{$gradient-card};
+  // Shadows
+  --shadow-minimal: #{$shadow-minimal};
+  --shadow-soft: #{$shadow-soft};
+  --shadow-card: #{$shadow-card};
   
-  // 阴影
-  --shadow-sm: #{$shadow-sm};
-  --shadow-md: #{$shadow-md};
-  --shadow-lg: #{$shadow-lg};
-  --shadow-xl: #{$shadow-xl};
-  
-  // 尺寸
+  // Border radius
   --border-radius-sm: #{$border-radius-sm};
   --border-radius-md: #{$border-radius-md};
   --border-radius-lg: #{$border-radius-lg};
   --border-radius-xl: #{$border-radius-xl};
   --border-radius-full: #{$border-radius-full};
   
-  // 字体
+  // Typography
   --font-family-base: #{$font-family-base};
   --font-size-xs: #{$font-size-xs};
   --font-size-sm: #{$font-size-sm};
@@ -73,13 +67,13 @@
   --font-size-lg: #{$font-size-lg};
   --font-size-xl: #{$font-size-xl};
   
-  // 过渡动画
+  // Transitions
   --transition-fast: #{$transition-fast};
   --transition-base: #{$transition-base};
   --transition-slow: #{$transition-slow};
 }
 
-// 通用工具类
+// Utility classes
 .sr-only {
   position: absolute;
   width: 1px;
@@ -104,7 +98,7 @@
 .opacity-75 { opacity: 0.75; }
 .opacity-90 { opacity: 0.9; }
 
-// 响应式工具类
+// Responsive utility classes
 .hidden-mobile {
   @include mobile {
     display: none !important;

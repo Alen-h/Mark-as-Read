@@ -1,54 +1,54 @@
 // Mark as Read - Background Script (Service Worker)
 
-// URL规范化函数 - 去掉query参数和fragment，只保留基础URL
+// URL normalization function - remove query parameters and fragments, keep only base URL
 function normalizeUrl(url) {
     try {
         const urlObj = new URL(url);
-        // 只保留protocol, hostname, port, pathname，去掉search和hash
+        // Keep only protocol, hostname, port, pathname, remove search and hash
         return `${urlObj.protocol}//${urlObj.host}${urlObj.pathname}`;
     } catch (error) {
         console.error('Failed to normalize URL:', error, url);
-        return url; // 如果解析失败，返回原始URL
+        return url; // Return original URL if parsing fails
     }
 }
 
-// 插件安装时的初始化
+// Initialize when extension is installed
 chrome.runtime.onInstalled.addListener((details) => {
     console.log('Mark as Read extension installed');
     
     if (details.reason === 'install') {
-        // 首次安装时初始化存储
+        // Initialize storage on first install
         chrome.storage.sync.set({ readUrls: {} });
     }
 });
 
-// 监听存储变化
+// Listen for storage changes
 chrome.storage.onChanged.addListener((changes, namespace) => {
     if (namespace === 'sync' && changes.readUrls) {
         console.log('Read URL list updated');
     }
 });
 
-// 处理来自content script或popup的消息
+// Handle messages from content script or popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.action) {
         case 'getReadStatus':
-            // 获取指定URL的已读状态
+            // Get read status for specified URL
             chrome.storage.sync.get(['readUrls']).then((result) => {
                 const readUrls = result.readUrls || {};
                 const normalizedUrl = normalizeUrl(request.url);
                 const isRead = !!readUrls[normalizedUrl];
                 sendResponse({ isRead });
             });
-            return true; // 保持消息通道开放
+            return true; // Keep message channel open
             
         case 'markAsRead':
-            // 标记URL为已读
+            // Mark URL as read
             chrome.storage.sync.get(['readUrls']).then((result) => {
                 const readUrls = result.readUrls || {};
                 const normalizedUrl = normalizeUrl(request.url);
                 
-                // 如果没有提供标题，尝试从发送者标签页获取
+                // If no title provided, try to get from sender tab
                 let title = request.title || '';
                 if (!title && sender.tab) {
                     title = sender.tab.title || '';
@@ -58,7 +58,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     title: title,
                     timestamp: Date.now(),
                     domain: new URL(request.url).hostname,
-                    originalUrl: request.url // 保存原始URL用于参考
+                    originalUrl: request.url // Save original URL for reference
                 };
                 return chrome.storage.sync.set({ readUrls });
             }).then(() => {
@@ -69,7 +69,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             return true;
             
         case 'markAsUnread':
-            // 取消标记
+            // Unmark URL
             chrome.storage.sync.get(['readUrls']).then((result) => {
                 const readUrls = result.readUrls || {};
                 const normalizedUrl = normalizeUrl(request.url);
@@ -84,9 +84,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-// 标签页更新时检查已读状态
+// Check read status when tab is updated
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === 'complete' && tab.url) {
-        // 可以在这里添加自动检查逻辑
+        // Can add automatic checking logic here
     }
 }); 

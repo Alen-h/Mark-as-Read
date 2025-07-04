@@ -1,8 +1,8 @@
-// Mark as Read - Content Script 样式入口文件
+// Mark as Read - Content Script styles entry file
 
-// 引入主题变量和 mixins
+// Import theme variables and mixins
 @import 'themes/variables';
 @import 'base/mixins';
 
-// 引入 Content Script 组件样式
+// Import Content Script component styles
 @import 'components/content'; 

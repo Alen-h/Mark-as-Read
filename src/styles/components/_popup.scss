@@ -1,7 +1,7 @@
-// Mark as Read - Popup 极简扁平化样式
-// 简洁、扁平、高对比度的弹出窗口设计
+// Mark as Read - Popup minimal flat styles
+// Clean, flat, high-contrast popup window design
 
-// 基础样式重置
+// Base style reset
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,14 +16,14 @@ body {
   margin: 0;
 }
 
-// 主容器 - 极简白色卡片
+// Main container - minimal white card
 .popup-container {
   @include container-flat;
   padding: $spacing-lg;
   color: $gray-800;
 }
 
-// 头部区域
+// Header area
 .popup-header {
   text-align: center;
   margin-bottom: $spacing-lg;
@@ -36,7 +36,7 @@ body {
   }
 }
 
-// 状态区域 - 简洁的状态卡片
+// Status area - clean status card
 .popup-status {
   background: $bg-gray-light;
   padding: $spacing-md;
@@ -46,7 +46,7 @@ body {
   text-align: center;
   transition: border-color $transition-base;
   
-  // 已读状态 - 使用简洁的绿色状态
+  // Read status - using clean green state
   &.read {
     @include state-success;
   }
@@ -84,7 +84,7 @@ body {
   line-height: 1.4;
 }
 
-// 按钮样式 - 极简扁平按钮
+// Button styles - minimal flat buttons
 .popup-button {
   width: 100%;
   padding: $spacing-sm $spacing-md;
@@ -101,7 +101,7 @@ body {
     outline-offset: 2px;
   }
   
-  // 主要按钮 - 成功状态
+  // Primary button - success state
   &.primary {
     background: $bg-success;
     color: white;
@@ -112,7 +112,7 @@ body {
       border-color: $theme-success-dark;
     }
     
-    // 未读状态 - 错误状态
+    // Unread state - error state
     &.unread {
       background: $bg-error;
       border-color: $bg-error;
@@ -124,14 +124,14 @@ body {
     }
   }
   
-  // 次要按钮
+  // Secondary button
   &.secondary {
     @include button-secondary;
     margin-bottom: $spacing-lg;
   }
 }
 
-// 统计信息区域 - 简洁信息卡片
+// Statistics area - clean info card
 .popup-stats {
   margin-top: $spacing-md;
   padding: $spacing-sm;
@@ -148,12 +148,12 @@ body {
   }
 }
 
-// 加载动画
+// Loading animation
 .loading {
-  @include loading-pulse;
+  @include fade-in;
 }
 
-// 移动端适配
+// Mobile adaptation
 @include mobile {
   body {
     width: 300px;

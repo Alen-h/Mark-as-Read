@@ -5,19 +5,19 @@
     let readIndicator = null;
     let isRead = false;
     
-    // URL规范化函数 - 去掉query参数和fragment，只保留基础URL
+    // URL normalization function - remove query parameters and fragments, keep only base URL
     function normalizeUrl(url) {
         try {
             const urlObj = new URL(url);
-            // 只保留protocol, hostname, port, pathname，去掉search和hash
+            // Keep only protocol, hostname, port, pathname, remove search and hash
             return `${urlObj.protocol}//${urlObj.host}${urlObj.pathname}`;
         } catch (error) {
             console.error('Failed to normalize URL:', error, url);
-            return url; // 如果解析失败，返回原始URL
+            return url; // Return original URL if parsing fails
         }
     }
     
-    // 创建已读指示器
+    // Create read indicator
     function createReadIndicator() {
         if (readIndicator) {
             return;
@@ -35,7 +35,7 @@
         document.body.appendChild(readIndicator);
     }
     
-    // 移除已读指示器
+    // Remove read indicator
     function removeReadIndicator() {
         if (readIndicator) {
             readIndicator.remove();
@@ -43,7 +43,7 @@
         }
     }
     
-    // 检查当前URL是否已读
+    // Check if current URL is marked as read
     async function checkReadStatus() {
         try {
             const result = await chrome.storage.sync.get(['readUrls']);
@@ -58,7 +58,7 @@
         }
     }
     
-    // 更新指示器显示
+    // Update indicator display
     function updateIndicator() {
         if (isRead) {
             createReadIndicator();
@@ -67,7 +67,7 @@
         }
     }
     
-    // 监听来自popup的消息
+    // Listen for messages from popup
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         if (request.action === 'updateReadStatus') {
             isRead = request.isRead;
@@ -75,7 +75,7 @@
         }
     });
     
-    // 监听URL变化（用于SPA应用）
+    // Listen for URL changes (for SPA applications)
     let lastUrl = location.href;
     new MutationObserver(() => {
         const url = location.href;
@@ -85,7 +85,7 @@
         }
     }).observe(document, { subtree: true, childList: true });
     
-    // 页面加载完成后检查状态
+    // Check status after page load
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', checkReadStatus);
     } else {

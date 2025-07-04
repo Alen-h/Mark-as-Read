@@ -1,12 +1,12 @@
-// Mark as Read - 极简扁平化 Mixins
-// 简洁、扁平的设计组件
+// Mark as Read - Minimal Flat Mixins
+// Clean, flat design components
 
-// === 卡片样式 mixin ===
+// === Card style mixins ===
 @mixin card-flat {
   background: $bg-white;
   border-radius: $border-radius-lg;
   border: $border-width solid $border-color;
-  // 移除复杂阴影，使用简单边框
+  // Remove complex shadows, use simple borders
 }
 
 @mixin card-minimal {
@@ -15,7 +15,7 @@
   border: $border-width solid $border-color-light;
 }
 
-// === 按钮样式 mixins ===
+// === Button style mixins ===
 @mixin button-base {
   display: inline-flex;
   align-items: center;
@@ -93,7 +93,7 @@
   }
 }
 
-// === 输入框样式 mixin ===
+// === Input style mixins ===
 @mixin input-flat {
   width: 100%;
   padding: $spacing-sm $spacing-md;
@@ -114,7 +114,7 @@
   }
 }
 
-// === 容器样式 mixins ===
+// === Container style mixins ===
 @mixin container-flat {
   background: $bg-white;
   border: $border-width solid $border-color;
@@ -133,7 +133,7 @@
   border-radius: $border-radius-lg;
 }
 
-// === 状态样式 mixins ===
+// === State style mixins ===
 @mixin state-success {
   background: $theme-success-light;
   color: $theme-success-dark;
@@ -152,7 +152,7 @@
   border: $border-width solid $warning-500;
 }
 
-// === 悬停效果 mixins ===
+// === Hover effects mixins ===
 @mixin hover-lift-minimal {
   transition: transform $transition-base;
   
@@ -169,7 +169,7 @@
   }
 }
 
-// === 文本样式 mixins ===
+// === Text style mixins ===
 @mixin text-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -183,7 +183,7 @@
   overflow: hidden;
 }
 
-// === 布局 mixins ===
+// === Layout mixins ===
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -202,66 +202,60 @@
   justify-content: flex-start;
 }
 
-// === 响应式断点 mixins ===
+// === Responsive breakpoint mixins ===
 @mixin mobile {
-  @media (max-width: 767px) {
+  @media (max-width: $breakpoint-mobile) {
     @content;
   }
 }
 
 @mixin tablet {
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (max-width: $breakpoint-tablet) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: 1024px) {
+  @media (min-width: $breakpoint-desktop) {
     @content;
   }
 }
 
-// === 动画 mixins ===
-@mixin loading-pulse {
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@mixin loading-spin {
-  animation: spin 1s linear infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
+// === Animation mixins ===
+@mixin fade-in {
+  opacity: 0;
+  animation: fadeIn $transition-base ease-out;
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
   }
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+@mixin slide-up {
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideUp $transition-base ease-out;
+  
+  @keyframes slideUp {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 }
 
-// === 简单的滑入动画 ===
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+// === Simple slide-in animation ===
+@mixin slide-in {
+  transform: translateX(100%);
+  opacity: 0;
+  animation: slideIn $transition-slow ease-out;
+  
+  @keyframes slideIn {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
 } 

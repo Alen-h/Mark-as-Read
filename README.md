@@ -1,142 +1,136 @@
-# Mark as Read - Chrome 扩展插件
+# Mark as Read - Chrome Extension
 
-一个简单易用的Chrome插件，帮助你标记和追踪已访问的网页。
+A simple and efficient Chrome extension to help you mark and track visited web pages.
 
-## 🌟 功能特点
+## 🌟 Features
 
-- ✅ **一键标记**: 通过插件弹窗一键标记当前网页为已读
-- 🔍 **视觉指示**: 在已读网页右上角显示"已读"标记
-- 📊 **统计信息**: 查看总计已读页面数量
-- 🔄 **实时同步**: 使用Chrome同步存储，数据在不同设备间同步
-- 🎨 **极简扁平**: 全新的极简扁平化设计，零视觉疲劳
-- 📱 **响应式**: 适配不同尺寸的屏幕
-- 🛠️ **SCSS架构**: 模块化的样式管理，便于维护和扩展
+- ✅ **One-Click Marking**: Mark current page as read through the extension popup
+- 🔍 **Visual Indicator**: Display "READ" badge on top-right corner of marked pages
+- 📊 **Statistics**: View total count of read pages
+- 🔄 **Real-time Sync**: Uses Chrome sync storage for cross-device synchronization
+- 🎨 **Minimal Flat Design**: Clean, flat design with zero visual fatigue
+- 📱 **Responsive**: Adapts to different screen sizes
+- 🛠️ **SCSS Architecture**: Modular style management for easy maintenance and extension
 
-## 🚀 安装方法
+## 🚀 Installation
 
-### 开发者模式安装
+### Developer Mode Installation
 
-1. 打开 Chrome 浏览器
-2. 访问 `chrome://extensions/`
-3. 开启右上角的"开发者模式"
-4. 点击"加载已解压的扩展程序"
-5. 选择这个项目的文件夹
-6. 插件安装完成！
+1. Open Chrome browser
+2. Navigate to `chrome://extensions/`
+3. Enable "Developer mode" in the top right
+4. Click "Load unpacked"
+5. Select this project folder
+6. Extension installed successfully!
 
-## 📖 使用方法
+## 📖 Usage
 
-### 标记网页为已读
+### Mark Page as Read
 
-1. 访问任意网页
-2. 点击浏览器工具栏中的 📚 "Mark as Read" 图标
-3. 在弹出窗口中点击"标记为已读"按钮
-4. 网页右上角会显示"已读"标记
+1. Visit any webpage
+2. Click the 📚 "Mark as Read" icon in the browser toolbar
+3. Click "Mark as Read" button in the popup
+4. A "READ" badge will appear on the top-right corner of the page
 
-### 取消已读标记
+### Unmark Page
 
-1. 在已标记的网页上点击插件图标
-2. 点击"取消标记"按钮
-3. 已读标记会被移除
+1. Click the extension icon on a marked page
+2. Click "Unmark" button
+3. The read badge will be removed
 
-### 查看统计
+### View Statistics
 
-在插件弹窗底部可以看到已读页面的总数统计。
+The total count of read pages is displayed at the bottom of the extension popup.
 
-## 🛠️ 技术实现
+## 🛠️ Technical Implementation
 
-- **Manifest V3**: 使用最新的Chrome扩展API
-- **存储同步**: 使用`chrome.storage.sync`实现跨设备同步
-- **内容脚本**: 在网页中注入已读指示器
-- **SCSS架构**: 模块化的样式管理，支持主题变量和mixins
-- **极简扁平**: 极简扁平化设计，移除渐变和复杂效果，专注内容
-- **响应式设计**: 适配不同尺寸和分辨率的屏幕
+- **Manifest V3**: Uses the latest Chrome extension APIs
+- **Storage Sync**: Uses `chrome.storage.sync` for cross-device synchronization
+- **Content Scripts**: Injects read indicators into web pages
+- **SCSS Architecture**: Modular style management with theme variables and mixins
+- **Minimal Flat Design**: Clean, flat design removing gradients and complex effects
+- **Responsive Design**: Adapts to different screen sizes and resolutions
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
 Mark as Read/
-├── manifest.json          # 插件配置文件
-├── package.json           # 依赖管理文件
+├── manifest.json          # Extension configuration
+├── package.json           # Dependencies management
 ├── src/
 │   ├── popup/
-│   │   ├── popup.html     # 弹窗界面
-│   │   ├── popup.js       # 弹窗逻辑
-│   │   └── popup.css      # 弹窗样式（SCSS编译生成）
+│   │   ├── popup.html     # Popup interface
+│   │   ├── popup.js       # Popup logic
+│   │   └── popup.css      # Popup styles (compiled from SCSS)
 │   ├── history/
-│   │   ├── history.html   # 历史页面
-│   │   ├── history.js     # 历史页面逻辑
-│   │   └── history.css    # 历史页面样式（SCSS编译生成）
+│   │   ├── history.html   # History page
+│   │   ├── history.js     # History page logic
+│   │   └── history.css    # History page styles (compiled from SCSS)
 │   ├── content/
-│   │   ├── content.js     # 内容脚本
-│   │   └── styles.css     # 内容脚本样式（SCSS编译生成）
+│   │   ├── content.js     # Content script
+│   │   └── styles.css     # Content script styles (compiled from SCSS)
 │   ├── background/
-│   │   └── background.js  # 后台脚本
-│   └── styles/            # SCSS源文件
+│   │   └── background.js  # Background service worker
+│   └── styles/            # SCSS source files
 │       ├── themes/
-│       │   └── _variables.scss    # 主题变量
+│       │   └── _variables.scss    # Theme variables
 │       ├── base/
-│       │   └── _mixins.scss       # 通用mixins
+│       │   └── _mixins.scss       # Common mixins
 │       ├── components/
-│       │   ├── _popup.scss        # 弹窗组件样式
-│       │   ├── _history.scss      # 历史页面组件样式
-│       │   └── _content.scss      # 内容脚本组件样式
-│       ├── popup.scss     # 弹窗入口文件
-│       ├── history.scss   # 历史页面入口文件
-│       ├── content.scss   # 内容脚本入口文件
-│       └── main.scss      # 主样式入口
+│       │   ├── _popup.scss        # Popup component styles
+│       │   ├── _history.scss      # History component styles
+│       │   └── _content.scss      # Content script component styles
+│       ├── popup.scss     # Popup entry file
+│       ├── history.scss   # History entry file
+│       ├── content.scss   # Content script entry file
+│       └── main.scss      # Main style entry
 ├── assets/
-│   └── icons/             # 图标文件夹
+│   └── icons/             # Icon files
 ├── docs/
-│   └── design-system.md  # 设计系统文档
-└── README.md              # 说明文档
+│   └── design-system.md  # Design system documentation
+└── README.md              # Project documentation
 ```
 
-## 🎨 极简扁平化设计
+## 🎨 Minimal Flat Design
 
-本项目采用极简扁平化设计理念，详细信息请查看 [设计系统文档](docs/design-system.md)
+This project follows minimal flat design principles. For detailed information, see [Design System Documentation](docs/design-system.md).
 
-### 设计理念
-- **视觉简洁**: 移除所有不必要的装饰效果
-- **认知轻松**: 降低视觉复杂度，减少用户认知负担
-- **聚焦内容**: 让用户专注于核心功能，而非界面装饰
-- **持久舒适**: 适合长时间使用，零视觉疲劳
+### Design Philosophy
+- **Visual Simplicity**: Remove all unnecessary decorative effects
+- **Cognitive Ease**: Reduce visual complexity and cognitive load
+- **Content Focus**: Help users focus on core functionality, not interface decoration
+- **Long-term Comfort**: Suitable for extended use with zero visual fatigue
 
-### 实现特色
-- **纯色背景**: 移除所有渐变，使用简洁纯色
-- **清晰边框**: 用边框定义元素边界，替代复杂阴影
-- **高对比度**: 确保文字清晰易读
-- **统一间距**: 标准化的间距和尺寸系统
+## 🔧 Development
 
-## 🔧 开发说明
-
-### 安装依赖
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 开发流程
+### Development Workflow
 
 ```bash
-# 开发模式（监听SCSS文件变化）
+# Development mode (watch SCSS files)
 npm run dev
 
-# 构建所有样式文件
+# Build all style files
 npm run build
 
-# 单独构建组件
+# Build individual components
 npm run build:scss:popup
 npm run build:scss:history
 npm run build:scss:content
 ```
 
-### 权限说明
+### Permissions
 
-- `storage`: 存储已读URL数据
-- `activeTab`: 获取当前活动标签页信息
-- `host_permissions`: 在所有网站上注入内容脚本
+- `storage`: Store read URL data
+- `activeTab`: Get current active tab information
+- `host_permissions`: Inject content scripts on all websites
 
-### 数据存储格式
+### Data Storage Format
 
 ```javascript
 {
@@ -150,30 +144,14 @@ npm run build:scss:content
 }
 ```
 
-## 🎯 未来计划
+## 🤝 Contributing
 
-- [ ] 添加已读页面管理界面
-- [ ] 支持按域名或日期筛选
-- [ ] 导出/导入已读数据
-- [ ] 添加阅读时间统计
-- [ ] 支持自定义标记样式
+Issues and Pull Requests are welcome!
 
-## 📝 更新日志
-
-### v1.0.0 (当前版本)
-- 初始版本发布
-- 基本的标记和显示功能
-- 现代化界面设计
-- 跨设备数据同步
-
-## 🤝 贡献
-
-欢迎提交 Issue 和 Pull Request！
-
-## 📄 许可证
+## 📄 License
 
 MIT License
 
 ---
 
-Made with ❤️ by Mark as Read Team 
+Made with ❤️ by Alen Hu
