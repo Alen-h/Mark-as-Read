@@ -1,5 +1,5 @@
-// Mark as Read - History modern card layout
-// Minimal, flat, highly usable history page design
+// Mark as Read - Modern History Page Styles
+// Clean, flat, modern history page design with fresh green theme
 
 // Base style reset
 * {
@@ -11,170 +11,221 @@
 body {
   font-family: $font-family-base;
   margin: 0;
-  padding: $spacing-lg;
+  padding: $spacing-xl;
   background: $bg-gray-light;
   min-height: 100vh;
-  line-height: 1.6;
+  line-height: $line-height-normal;
+  color: $gray-800;
 }
 
-// Main container - clean white card
+// Main container - modern card layout
 .history-container {
   max-width: 1200px;
   margin: 0 auto;
-  @include card-flat;
+  @include container-modern;
 }
 
-// Header - clean primary color background
+// Header - modern gradient background
 .history-header {
-  @include container-primary;
-  padding: $spacing-xl;
+  background: linear-gradient(135deg, $theme-primary 0%, $theme-primary-dark 100%);
+  color: white;
+  padding: $spacing-3xl $spacing-xl;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+    background-size: 50px 50px;
+    animation: float 20s infinite linear;
+  }
   
   h1 {
-    margin: 0;
-    font-size: $font-size-3xl;
+    margin: 0 0 $spacing-sm 0;
+    font-size: $font-size-4xl;
     font-weight: $font-weight-semibold;
-    color: white;
+    position: relative;
+    z-index: 1;
+    
+    &::before {
+      content: "📚";
+      display: block;
+      font-size: $font-size-4xl;
+      margin-bottom: $spacing-sm;
+    }
   }
 }
 
 .header-subtitle {
-  margin-top: $spacing-xs;
-  font-size: $font-size-base;
+  font-size: $font-size-lg;
   color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 1;
+  font-weight: $font-weight-normal;
 }
 
-// Control area
+// Control area - clean modern design
 .history-controls {
   padding: $spacing-xl;
-  border-bottom: $border-width solid $border-color;
-  background: $bg-gray;
+  background: $bg-white;
+  border-bottom: $border-width solid $border-color-light;
 }
 
 .controls-wrapper {
   display: flex;
   flex-direction: column;
-  gap: $spacing-md;
+  gap: $spacing-lg;
   
   @include tablet {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 0;
+    gap: $spacing-xl;
   }
 }
 
 .stats-info {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
   color: $gray-600;
   font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  
+  &::before {
+    content: "📊";
+    font-size: $font-size-xl;
+  }
   
   span {
     font-weight: $font-weight-semibold;
     color: $theme-primary;
+    background: $bg-primary-light;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-md;
   }
 }
 
 .sort-controls {
   display: flex;
   flex-wrap: wrap;
-  gap: $spacing-xs;
+  gap: $spacing-sm;
+  
+  @include tablet {
+    justify-content: flex-end;
+  }
 }
 
 .sort-button {
   @include button-secondary;
   font-size: $font-size-sm;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-md;
   
   &.active {
-    background: $theme-primary;
-    color: white;
-    border-color: $theme-primary;
+    @include button-primary;
   }
 }
 
 // Content area
 .history-content {
-  min-height: 400px;
+  min-height: 500px;
+  background: $bg-white;
 }
 
 // Loading state
 .loading-state {
-  text-align: center;
-  padding: $spacing-2xl $spacing-lg;
+  @include flex-center;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-3xl;
   color: $gray-500;
-  font-size: $font-size-base;
-}
-
-.loading-spinner {
-  display: inline-block;
-  width: 32px;
-  height: 32px;
-  border: 2px solid $border-color;
-  border-bottom-color: $theme-primary;
-  border-radius: 50%;
-  @include fade-in;
-  margin-bottom: $spacing-sm;
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid $border-color;
+    border-top: 3px solid $theme-primary;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  .loading-text {
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+  }
 }
 
 // Empty state
 .empty-state {
+  @include flex-center;
+  flex-direction: column;
+  gap: $spacing-lg;
+  padding: $spacing-3xl;
   text-align: center;
-  padding: $spacing-2xl $spacing-lg;
-  color: $gray-500;
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.empty-icon {
-  font-size: 48px;
-  margin-bottom: $spacing-md;
-  color: $gray-300;
-}
-
-.empty-title {
-  font-size: $font-size-xl;
-  margin-bottom: $spacing-sm;
-  color: $gray-700;
-  font-weight: $font-weight-medium;
-}
-
-.empty-subtitle {
-  font-size: $font-size-base;
-  color: $gray-500;
-}
-
-.error-message {
-  color: $theme-error;
-  font-weight: $font-weight-medium;
+  @include slide-in-up;
+  
+  .empty-icon {
+    font-size: 64px;
+    color: $gray-300;
+    margin-bottom: $spacing-md;
+  }
+  
+  .empty-title {
+    font-size: $font-size-2xl;
+    color: $gray-700;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-sm;
+  }
+  
+  .empty-subtitle {
+    font-size: $font-size-base;
+    color: $gray-500;
+    max-width: 400px;
+    line-height: $line-height-relaxed;
+  }
 }
 
 // History record list
 .history-list {
-  padding: $spacing-lg;
+  padding: $spacing-xl;
   display: grid;
-  gap: $spacing-md;
+  gap: $spacing-lg;
   grid-template-columns: 1fr;
   
   @include tablet {
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: $spacing-lg;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: $spacing-xl;
+  }
+  
+  @include desktop {
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   }
 }
 
-// History record card
+// History record card - modern design
 .history-card {
-  @include card-flat;
+  @include card-modern;
   padding: 0;
-  transition: all $transition-base;
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(30px);
+  transition: all $transition-base;
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    box-shadow: $shadow-float;
   }
   
   &.animate-in {
     opacity: 1;
     transform: translateY(0);
+    @include slide-in-up;
   }
   
   &.animate-out {
@@ -186,11 +237,11 @@ body {
 
 // Card header
 .card-header {
-  display: flex;
+  @include flex-between;
   align-items: flex-start;
-  justify-content: space-between;
-  padding: $spacing-lg $spacing-lg $spacing-md $spacing-lg;
-  border-bottom: $border-width solid $bg-gray;
+  padding: $spacing-xl $spacing-xl $spacing-md $spacing-xl;
+  border-bottom: $border-width solid $border-color-light;
+  background: $bg-gray-light;
 }
 
 .card-title {
@@ -198,46 +249,35 @@ body {
   min-width: 0;
   
   h3 {
-    margin: 0 0 $spacing-xs 0;
+    margin: 0 0 $spacing-sm 0;
     font-size: $font-size-lg;
     font-weight: $font-weight-semibold;
     color: $gray-900;
-    line-height: 1.4;
-    @include text-truncate;
+    line-height: $line-height-snug;
+    @include text-clamp(2);
   }
 }
 
 .domain-badge {
-  display: inline-block;
-  padding: $spacing-xs $spacing-sm;
-  background: $bg-primary-light;
-  color: $theme-primary;
-  border-radius: $border-radius-full;
-  font-size: $font-size-xs;
-  font-weight: $font-weight-medium;
-  border: $border-width solid $theme-primary;
+  @include badge-primary;
+  margin-left: $spacing-sm;
+  flex-shrink: 0;
 }
 
 .card-actions {
-  margin-left: $spacing-sm;
+  flex-shrink: 0;
+  margin-left: $spacing-md;
 }
 
 .remove-button {
-  padding: $spacing-xs;
-  background: transparent;
-  border: $border-width solid $border-color;
-  border-radius: $border-radius-md;
+  @include button-icon;
   color: $gray-400;
-  cursor: pointer;
-  transition: all $transition-base;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   
   &:hover {
     background: $bg-error;
     border-color: $theme-error;
     color: white;
+    transform: translateY(-1px);
   }
   
   &:focus {
@@ -246,60 +286,84 @@ body {
   }
   
   svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
 }
 
 // Card content
 .card-content {
-  padding: 0 $spacing-lg $spacing-md $spacing-lg;
+  padding: $spacing-lg $spacing-xl;
+  background: $bg-white;
 }
 
 .url-section {
-  margin-bottom: $spacing-sm;
+  margin-bottom: $spacing-md;
 }
 
 .url-link {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
   color: $theme-accent;
   text-decoration: none;
   font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-relaxed;
   word-break: break-all;
-  line-height: 1.5;
+  padding: $spacing-sm $spacing-md;
+  background: $bg-accent-light;
+  border-radius: $border-radius-md;
+  border: $border-width solid $theme-accent;
+  transition: all $transition-base;
+  
+  &::before {
+    content: "🔗";
+    font-size: $font-size-base;
+    flex-shrink: 0;
+  }
   
   &:hover {
-    text-decoration: underline;
-    color: $theme-accent-dark;
+    background: $theme-accent;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: $shadow-soft;
   }
 }
 
 .url-details {
-  margin-top: $spacing-sm;
+  margin-top: $spacing-md;
   display: flex;
   flex-wrap: wrap;
-  gap: $spacing-xs;
+  gap: $spacing-sm;
 }
 
 .url-param {
+  @include badge-secondary;
   font-size: $font-size-xs;
-  color: $gray-500;
-  background: $bg-gray;
-  padding: $spacing-xs $spacing-sm;
-  border-radius: $border-radius-sm;
-  border: $border-width solid $border-color-light;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 // Card footer
 .card-footer {
-  padding: $spacing-sm $spacing-lg $spacing-lg $spacing-lg;
-  border-top: $border-width solid $bg-gray;
+  padding: $spacing-md $spacing-xl $spacing-xl $spacing-xl;
   background: $bg-gray-light;
+  border-top: $border-width solid $border-color-light;
 }
 
 .time-text {
-  font-size: $font-size-xs;
-  color: $gray-500;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-sm;
+  color: $gray-600;
   font-weight: $font-weight-medium;
+  
+  &::before {
+    content: "⏱️";
+    font-size: $font-size-base;
+  }
 }
 
 // Hidden state
@@ -307,15 +371,13 @@ body {
   display: none !important;
 }
 
-// Animations
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+// Keyframes
+@keyframes float {
+  0% {
+    transform: translateX(0);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  100% {
+    transform: translateX(-100px);
   }
 }
 
@@ -326,10 +388,18 @@ body {
   }
   
   .history-header {
-    padding: $spacing-lg;
+    padding: $spacing-xl $spacing-lg;
     
     h1 {
-      font-size: $font-size-2xl;
+      font-size: $font-size-3xl;
+      
+      &::before {
+        font-size: $font-size-3xl;
+      }
+    }
+    
+    .header-subtitle {
+      font-size: $font-size-base;
     }
   }
   
@@ -337,24 +407,55 @@ body {
     padding: $spacing-lg;
   }
   
-  .history-list {
-    padding: $spacing-md;
+  .controls-wrapper {
     gap: $spacing-md;
   }
   
-  .card-header {
-    padding: $spacing-md $spacing-md $spacing-sm $spacing-md;
-  }
-  
-  .card-content {
-    padding: 0 $spacing-md $spacing-sm $spacing-md;
-  }
-  
-  .card-footer {
-    padding: $spacing-sm $spacing-md $spacing-md $spacing-md;
+  .stats-info {
+    font-size: $font-size-base;
   }
   
   .sort-controls {
     justify-content: center;
+  }
+  
+  .history-list {
+    padding: $spacing-lg;
+    gap: $spacing-lg;
+  }
+  
+  .card-header {
+    padding: $spacing-lg $spacing-lg $spacing-md $spacing-lg;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-md;
+  }
+  
+  .card-title {
+    h3 {
+      font-size: $font-size-base;
+    }
+  }
+  
+  .domain-badge {
+    margin-left: 0;
+  }
+  
+  .card-actions {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+  
+  .card-content {
+    padding: $spacing-md $spacing-lg;
+  }
+  
+  .card-footer {
+    padding: $spacing-md $spacing-lg $spacing-lg $spacing-lg;
+  }
+  
+  .url-link {
+    padding: $spacing-sm;
+    font-size: $font-size-xs;
   }
 } 

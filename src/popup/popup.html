@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark as Read</title>
     <link rel="stylesheet" href="popup.css">
 </head>
 <body>
     <div class="popup-container">
         <div class="popup-header">
-            <h1>📚 Mark as Read</h1>
+            <h1>Mark as Read</h1>
         </div>
         
         <div id="status" class="popup-status">
@@ -16,21 +18,25 @@
             <div class="url-display" id="urlDisplay"></div>
         </div>
         
-        <button id="actionButton" class="popup-button primary">
-            Mark as Read
-        </button>
-        
-        <button id="viewHistoryButton" class="popup-button secondary">
-            📋 View Read History
-        </button>
+        <div class="popup-actions">
+            <button id="actionButton" class="popup-button primary">
+                Mark as Read
+            </button>
+            
+            <button id="viewHistoryButton" class="popup-button secondary">
+                View Read History
+            </button>
+        </div>
         
         <div class="popup-stats">
-            <div>Total Read: <span id="totalRead">0</span> pages</div>
+            <div class="stats-item">
+                Total Read: <span id="totalRead">0</span> pages
+            </div>
         </div>
         
         <div class="popup-footer">
             <a href="#" id="shortcutSettingsLink" class="shortcut-link">
-                ⌨️ Set Keyboard Shortcut
+                Set Keyboard Shortcut
             </a>
         </div>
     </div>

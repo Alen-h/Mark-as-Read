@@ -1,34 +1,51 @@
-// Mark as Read - Minimal Flat Mixins
-// Clean, flat design components
+// Mark as Read - Modern Flat Design Mixins
+// Clean, minimal, consistent design components
 
-// === Card style mixins ===
-@mixin card-flat {
+// === Modern card styles ===
+@mixin card-modern {
   background: $bg-white;
   border-radius: $border-radius-lg;
   border: $border-width solid $border-color;
-  // Remove complex shadows, use simple borders
+  box-shadow: $shadow-card;
+  transition: all $transition-base;
+  
+  &:hover {
+    box-shadow: $shadow-float;
+    transform: translateY(-2px);
+  }
+}
+
+@mixin card-flat {
+  background: $bg-white;
+  border-radius: $border-radius-lg;
+  border: $border-width solid $border-color-light;
+  box-shadow: $shadow-minimal;
 }
 
 @mixin card-minimal {
-  background: $bg-gray-light;
+  background: $bg-white;
   border-radius: $border-radius-md;
   border: $border-width solid $border-color-light;
 }
 
-// === Button style mixins ===
+// === Modern button styles ===
 @mixin button-base {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: $spacing-xs;
   padding: $spacing-sm $spacing-md;
   border: $border-width solid transparent;
   border-radius: $border-radius-md;
   font-family: $font-family-base;
   font-size: $font-size-sm;
   font-weight: $font-weight-medium;
+  line-height: $line-height-snug;
   cursor: pointer;
   transition: all $transition-base;
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
   
   &:focus {
     outline: 2px solid $theme-accent;
@@ -38,6 +55,12 @@
   &:disabled {
     opacity: $opacity-disabled;
     cursor: not-allowed;
+  }
+  
+  svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
   }
 }
 
@@ -50,22 +73,39 @@
   &:hover:not(:disabled) {
     background: $theme-success-dark;
     border-color: $theme-success-dark;
+    transform: translateY(-1px);
+    box-shadow: $shadow-soft;
   }
   
   &:active {
-    background: $theme-success-dark;
+    transform: translateY(0);
+    box-shadow: $shadow-minimal;
   }
 }
 
 @mixin button-secondary {
   @include button-base;
   background: $bg-white;
-  color: $theme-primary;
+  color: $gray-700;
   border-color: $border-color;
   
   &:hover:not(:disabled) {
     background: $bg-gray-light;
     border-color: $border-color-dark;
+    transform: translateY(-1px);
+    box-shadow: $shadow-soft;
+  }
+}
+
+@mixin button-ghost {
+  @include button-base;
+  background: transparent;
+  color: $gray-600;
+  border-color: transparent;
+  
+  &:hover:not(:disabled) {
+    background: $bg-gray-light;
+    color: $gray-700;
   }
 }
 
@@ -78,98 +118,146 @@
   &:hover:not(:disabled) {
     background: $theme-error-dark;
     border-color: $theme-error-dark;
+    transform: translateY(-1px);
+    box-shadow: $shadow-soft;
   }
 }
 
-@mixin button-ghost {
+@mixin button-icon {
   @include button-base;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: $border-radius-md;
   background: transparent;
-  color: $theme-primary;
-  border-color: $theme-primary;
+  color: $gray-500;
   
   &:hover:not(:disabled) {
-    background: $theme-primary;
-    color: white;
+    background: $bg-gray-light;
+    color: $gray-700;
   }
 }
 
-// === Input style mixins ===
-@mixin input-flat {
+// === Modern input styles ===
+@mixin input-modern {
   width: 100%;
   padding: $spacing-sm $spacing-md;
   border: $border-width solid $border-color;
   border-radius: $border-radius-md;
   font-family: $font-family-base;
   font-size: $font-size-sm;
+  line-height: $line-height-normal;
   background: $bg-white;
-  transition: border-color $transition-base;
+  transition: all $transition-base;
   
   &:focus {
     outline: none;
     border-color: $theme-accent;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
   }
   
   &::placeholder {
     color: $gray-400;
   }
+  
+  &:disabled {
+    background: $bg-gray-light;
+    color: $gray-400;
+    cursor: not-allowed;
+  }
 }
 
-// === Container style mixins ===
-@mixin container-flat {
+// === Container styles ===
+@mixin container-modern {
   background: $bg-white;
-  border: $border-width solid $border-color;
-  border-radius: $border-radius-lg;
+  border: $border-width solid $border-color-light;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-card;
+  overflow: hidden;
 }
 
 @mixin container-primary {
-  background: $bg-primary;
+  background: linear-gradient(135deg, $theme-primary 0%, $theme-primary-dark 100%);
   color: white;
-  border-radius: $border-radius-lg;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-card;
 }
 
 @mixin container-accent {
-  background: $bg-accent;
+  background: linear-gradient(135deg, $theme-accent 0%, $theme-accent-dark 100%);
   color: white;
-  border-radius: $border-radius-lg;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-card;
 }
 
-// === State style mixins ===
+// === State styles ===
 @mixin state-success {
-  background: $theme-success-light;
+  background: $bg-success-light;
   color: $theme-success-dark;
   border: $border-width solid $theme-success;
+  border-radius: $border-radius-md;
 }
 
 @mixin state-error {
-  background: $theme-error-light;
+  background: $bg-error-light;
   color: $theme-error-dark;
   border: $border-width solid $theme-error;
+  border-radius: $border-radius-md;
 }
 
 @mixin state-warning {
   background: $warning-100;
   color: $warning-700;
   border: $border-width solid $warning-500;
+  border-radius: $border-radius-md;
 }
 
-// === Hover effects mixins ===
-@mixin hover-lift-minimal {
-  transition: transform $transition-base;
-  
-  &:hover {
-    transform: translateY(-1px);
-  }
+// === Badge styles ===
+@mixin badge-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-tight;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-@mixin hover-bg-change($bg-color: $bg-gray-light) {
-  transition: background-color $transition-base;
-  
-  &:hover {
-    background-color: $bg-color;
-  }
+@mixin badge-primary {
+  @include badge-base;
+  background: $theme-primary;
+  color: white;
 }
 
-// === Text style mixins ===
+@mixin badge-secondary {
+  @include badge-base;
+  background: $gray-100;
+  color: $gray-700;
+}
+
+@mixin badge-success {
+  @include badge-base;
+  background: $theme-success;
+  color: white;
+}
+
+// === Animation utilities ===
+@mixin fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@mixin slide-in-up {
+  animation: slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@mixin scale-in {
+  animation: scaleIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// === Text utilities ===
 @mixin text-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -183,7 +271,7 @@
   overflow: hidden;
 }
 
-// === Layout mixins ===
+// === Layout utilities ===
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -202,7 +290,17 @@
   justify-content: flex-start;
 }
 
-// === Responsive breakpoint mixins ===
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// === Responsive utilities ===
 @mixin mobile {
   @media (max-width: $breakpoint-mobile) {
     @content;
@@ -210,7 +308,7 @@
 }
 
 @mixin tablet {
-  @media (max-width: $breakpoint-tablet) {
+  @media (min-width: $breakpoint-tablet) {
     @content;
   }
 }
@@ -221,41 +319,58 @@
   }
 }
 
-// === Animation mixins ===
-@mixin fade-in {
-  opacity: 0;
-  animation: fadeIn $transition-base ease-out;
-  
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
+@mixin wide {
+  @media (min-width: $breakpoint-wide) {
+    @content;
   }
 }
 
-@mixin slide-up {
-  transform: translateY(20px);
-  opacity: 0;
-  animation: slideUp $transition-base ease-out;
-  
-  @keyframes slideUp {
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+// === Keyframes ===
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
-// === Simple slide-in animation ===
-@mixin slide-in {
-  transform: translateX(100%);
-  opacity: 0;
-  animation: slideIn $transition-slow ease-out;
-  
-  @keyframes slideIn {
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 } 

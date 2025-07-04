@@ -1,80 +1,180 @@
-// Mark as Read - Content Script minimal flat styles
-// Clean, flat content script indicator design
+// Mark as Read - Modern Content Script Styles
+// Clean, flat, modern content script indicator design
 
 #mark-as-read-indicator {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 24px;
+  right: 24px;
   z-index: $z-content-script;
   
-  // Use clean green background, remove gradients
-  background: $bg-success;
-  color: white;
-  padding: $spacing-sm $spacing-md;
-  border-radius: $border-radius-full;
-  border: $border-width solid $theme-success-dark;
+  // Modern card design with fresh green theme
+  background: $bg-white;
+  border: $border-width-thick solid $theme-success;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-float;
   
   font-family: $font-family-base;
   font-size: $font-size-sm;
   font-weight: $font-weight-medium;
+  line-height: $line-height-normal;
   
-  // Simplified animation
-  animation: slideIn $transition-slow ease-out;
+  // Smooth entrance animation
+  animation: slideInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transition: all $transition-base;
   
   .indicator-content {
     @include flex-center;
-    gap: $spacing-xs;
+    gap: $spacing-sm;
+    padding: $spacing-md $spacing-lg;
   }
   
   .indicator-icon {
-    font-size: $font-size-base;
+    font-size: $font-size-xl;
+    color: $theme-success;
   }
   
   .indicator-text {
     font-weight: $font-weight-semibold;
+    color: $gray-800;
   }
   
-  // Simplified hover effect
+  // Modern hover effect
   &:hover {
-    background: $theme-success-dark;
+    background: $theme-success;
     border-color: $theme-success-dark;
-    @include hover-lift-minimal;
+    transform: translateY(-2px);
+    box-shadow: $shadow-float;
+    
+    .indicator-text {
+      color: white;
+    }
+    
+    .indicator-icon {
+      color: white;
+    }
+  }
+  
+  // Success state - when page is marked as read
+  &.success {
+    background: $bg-success-light;
+    border-color: $theme-success;
+    
+    .indicator-text {
+      color: $theme-success-dark;
+    }
+    
+    .indicator-icon {
+      color: $theme-success;
+    }
+  }
+  
+  // Error state - when there's an error
+  &.error {
+    background: $bg-error-light;
+    border-color: $theme-error;
+    
+    .indicator-text {
+      color: $theme-error-dark;
+    }
+    
+    .indicator-icon {
+      color: $theme-error;
+    }
   }
 }
 
-// Simple slide-in animation
-@keyframes slideIn {
+// Modern slide-in with scale animation
+@keyframes slideInScale {
   from {
-    transform: translateX(100%);
+    transform: translateX(100%) scale(0.8);
     opacity: 0;
   }
   to {
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
     opacity: 1;
+  }
+}
+
+// Pulse animation for attention
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
   }
 }
 
 // Responsive design
 @include mobile {
   #mark-as-read-indicator {
-    top: 10px;
-    right: 10px;
+    top: 16px;
+    right: 16px;
     font-size: $font-size-xs;
-    padding: $spacing-xs $spacing-sm;
+    
+    .indicator-content {
+      padding: $spacing-sm $spacing-md;
+      gap: $spacing-xs;
+    }
+    
+    .indicator-icon {
+      font-size: $font-size-lg;
+    }
   }
 }
 
-// Dark theme adaptation - keep clean dark version
+// Dark theme adaptation
 body.dark-theme #mark-as-read-indicator,
 body[data-theme="dark"] #mark-as-read-indicator,
 html[data-theme="dark"] #mark-as-read-indicator {
-  background: $theme-success-dark;
+  background: $gray-800;
   border-color: $theme-success;
   
+  .indicator-text {
+    color: $gray-100;
+  }
+  
+  .indicator-icon {
+    color: $theme-success;
+  }
+  
   &:hover {
-    background: $success-700;
-    border-color: $success-700;
+    background: $theme-success;
+    border-color: $theme-success-dark;
+    
+    .indicator-text {
+      color: white;
+    }
+    
+    .indicator-icon {
+      color: white;
+    }
+  }
+  
+  &.success {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: $theme-success;
+    
+    .indicator-text {
+      color: $theme-success;
+    }
+    
+    .indicator-icon {
+      color: $theme-success;
+    }
+  }
+  
+  &.error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: $theme-error;
+    
+    .indicator-text {
+      color: $theme-error;
+    }
+    
+    .indicator-icon {
+      color: $theme-error;
+    }
   }
 }
 
@@ -83,4 +183,32 @@ html[data-theme="dark"] #mark-as-read-indicator {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: inherit;
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  #mark-as-read-indicator {
+    border-width: 3px;
+    font-weight: $font-weight-bold;
+    
+    .indicator-text {
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  #mark-as-read-indicator {
+    animation: none;
+    transition: none;
+  }
+  
+  @keyframes slideInScale {
+    from, to {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+    }
+  }
 } 

@@ -1,5 +1,5 @@
-// Mark as Read - Popup minimal flat styles
-// Clean, flat, high-contrast popup window design
+// Mark as Read - Modern Popup Styles
+// Clean, flat, modern popup window design with fresh green theme
 
 // Base style reset
 * {
@@ -9,110 +9,120 @@
 }
 
 body {
-  width: 332px;
-  padding: $spacing-md;
+  width: 360px;
+  padding: 0;
   font-family: $font-family-base;
   background: $bg-gray-light;
   margin: 0;
+  line-height: $line-height-normal;
 }
 
-// Main container - minimal white card
+// Main container - modern card design
 .popup-container {
-  @include container-flat;
-  padding: $spacing-lg;
+  @include container-modern;
+  padding: 0;
   color: $gray-800;
+  overflow: hidden;
 }
 
-// Header area
+// Header area - clean gradient background
 .popup-header {
+  background: linear-gradient(135deg, $theme-primary 0%, $theme-primary-dark 100%);
+  color: white;
+  padding: $spacing-lg $spacing-lg $spacing-md;
   text-align: center;
-  margin-bottom: $spacing-lg;
   
   h1 {
     margin: 0;
     font-size: $font-size-xl;
     font-weight: $font-weight-semibold;
-    color: $gray-900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    
+    &::before {
+      content: "📖";
+      font-size: $font-size-2xl;
+    }
   }
 }
 
 // Status area - clean status card
 .popup-status {
-  background: $bg-gray-light;
-  padding: $spacing-md;
-  border-radius: $border-radius-md;
-  border: $border-width solid $border-color-light;
-  margin-bottom: $spacing-md;
-  text-align: center;
-  transition: border-color $transition-base;
+  background: $bg-white;
+  padding: $spacing-lg;
+  border-bottom: $border-width solid $border-color-light;
   
-  // Read status - using clean green state
+  // Read status - success state
   &.read {
-    @include state-success;
+    background: $bg-success-light;
+    border-color: $theme-success;
   }
 }
 
 .status-text {
   font-size: $font-size-base;
-  margin-bottom: $spacing-sm;
   font-weight: $font-weight-medium;
-  color: $gray-700;
+  margin-bottom: $spacing-md;
+  text-align: center;
+  
+  .read & {
+    color: $theme-success-dark;
+  }
 }
 
 .title-display {
   font-size: $font-size-sm;
   font-weight: $font-weight-medium;
   margin-bottom: $spacing-sm;
-  padding: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
   background: $bg-white;
   border: $border-width solid $border-color-light;
-  border-radius: $border-radius-sm;
-  line-height: 1.4;
+  border-radius: $border-radius-md;
+  line-height: $line-height-relaxed;
   word-break: break-word;
   color: $gray-800;
+  @include text-clamp(2);
 }
 
 .url-display {
   font-size: $font-size-xs;
   color: $gray-500;
   word-break: break-all;
-  background: $bg-gray;
-  padding: $spacing-sm;
+  background: $bg-gray-light;
+  padding: $spacing-sm $spacing-md;
   border-radius: $border-radius-sm;
-  margin-top: $spacing-sm;
   border: $border-width solid $border-color-light;
-  line-height: 1.4;
+  line-height: $line-height-relaxed;
+  @include text-clamp(1);
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
 }
 
-// Button styles - minimal flat buttons
+// Action buttons area
+.popup-actions {
+  padding: $spacing-lg;
+  background: $bg-white;
+  border-bottom: $border-width solid $border-color-light;
+}
+
+// Button styles - modern flat buttons
 .popup-button {
   width: 100%;
-  padding: $spacing-sm $spacing-md;
-  border: $border-width solid transparent;
-  border-radius: $border-radius-md;
-  font-size: $font-size-base;
-  font-weight: $font-weight-medium;
-  cursor: pointer;
-  transition: all $transition-base;
   margin-bottom: $spacing-sm;
-  
-  &:focus {
-    outline: 2px solid $theme-accent;
-    outline-offset: 2px;
-  }
   
   // Primary button - success state
   &.primary {
-    background: $bg-success;
-    color: white;
-    border-color: $bg-success;
+    @include button-primary;
+    font-size: $font-size-base;
+    padding: $spacing-md $spacing-lg;
     
-    &:hover {
-      background: $theme-success-dark;
-      border-color: $theme-success-dark;
+    &::before {
+      content: "✓";
+      font-size: $font-size-lg;
     }
     
-    // Unread state - error state
+    // Unread state - remove button
     &.unread {
       background: $bg-error;
       border-color: $bg-error;
@@ -121,55 +131,85 @@ body {
         background: $theme-error-dark;
         border-color: $theme-error-dark;
       }
+      
+      &::before {
+        content: "✗";
+      }
     }
   }
   
   // Secondary button
   &.secondary {
     @include button-secondary;
-    margin-bottom: $spacing-lg;
+    font-size: $font-size-sm;
+    padding: $spacing-sm $spacing-md;
+    margin-bottom: 0;
+    
+    &::before {
+      content: "📋";
+      font-size: $font-size-base;
+    }
   }
 }
 
 // Statistics area - clean info card
 .popup-stats {
-  margin-top: $spacing-md;
-  padding: $spacing-sm;
+  padding: $spacing-md $spacing-lg;
   background: $bg-accent-light;
-  border: $border-width solid $theme-accent;
-  border-radius: $border-radius-md;
-  font-size: $font-size-xs;
+  border-bottom: $border-width solid $border-color-light;
   text-align: center;
-  color: $theme-accent-dark;
   
-  span {
-    font-weight: $font-weight-semibold;
+  .stats-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    font-size: $font-size-sm;
     color: $theme-accent-dark;
+    
+    &::before {
+      content: "📊";
+      font-size: $font-size-base;
+    }
+    
+    span {
+      font-weight: $font-weight-semibold;
+      color: $theme-accent-dark;
+    }
   }
 }
 
-// Footer area - shortcuts settings
+// Footer area - shortcuts and settings
 .popup-footer {
-  margin-top: $spacing-xs;
+  padding: $spacing-md $spacing-lg;
+  background: $bg-gray-light;
   text-align: center;
-  padding-top: $spacing-xs;
-  border-top: $border-width solid $border-color-light;
 }
 
 .shortcut-link {
-  display: inline-block;
-  font-size: 11px;
-  color: $gray-400;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  font-size: $font-size-xs;
+  color: $gray-500;
   text-decoration: none;
-  padding: $spacing-xs $spacing-sm;
-  border-radius: $border-radius-sm;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-md;
   transition: all $transition-base;
-  font-weight: $font-weight-normal;
+  font-weight: $font-weight-medium;
+  
+  &::before {
+    content: "⌨️";
+    font-size: $font-size-sm;
+  }
   
   &:hover {
-    color: $gray-500;
-    background: $bg-gray-light;
+    color: $gray-700;
+    background: $bg-white;
     text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: $shadow-soft;
   }
   
   &:focus {
@@ -178,23 +218,67 @@ body {
   }
 }
 
-// Loading animation
+// Loading states
 .loading {
   @include fade-in;
+  
+  .popup-button {
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 16px;
+      height: 16px;
+      margin: -8px 0 0 -8px;
+      border: 2px solid transparent;
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
 }
 
-// Mobile adaptation
+// Modern hover effects
+.popup-button:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: $shadow-soft;
+}
+
+// Focus states for accessibility
+.popup-button:focus,
+.shortcut-link:focus {
+  outline: 2px solid $theme-accent;
+  outline-offset: 2px;
+}
+
+// Responsive design
 @include mobile {
   body {
-    width: 300px;
-    padding: $spacing-sm;
+    width: 320px;
   }
   
   .popup-container {
+    border-radius: $border-radius-md;
+  }
+  
+  .popup-header {
+    padding: $spacing-md;
+    
+    h1 {
+      font-size: $font-size-lg;
+    }
+  }
+  
+  .popup-status,
+  .popup-actions {
     padding: $spacing-md;
   }
   
-  .popup-header h1 {
-    font-size: $font-size-lg;
+  .popup-button {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
   }
 } 
