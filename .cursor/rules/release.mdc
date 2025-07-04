@@ -1,0 +1,40 @@
+---
+description: Chrome extension packaging and release rules - Standardized management of release processes and file organization
+globs: ["**/release/**", "package.json", "manifest.json", "**/*.md"]
+alwaysApply: false
+---
+
+# Chrome Extension Packaging and Release Rules
+
+## Core Principles
+
+### File Organization Standards
+- All packaging and release-related files must be stored in the `/release` folder
+- Including but not limited to: build scripts, packaging configurations, release documentation, version records, store assets, etc.
+- Maintain a clear `/release` folder structure for easy maintenance and version management
+
+### Packaging Standards
+- Generated zip files must comply with Chrome Web Store upload requirements
+- Exclude unnecessary files: development dependencies, source files, test files, etc.
+- Ensure manifest.json version number matches package.json version
+- Must execute code building and compression optimization before packaging
+
+### Release Process
+- Complete local testing must be performed before release
+- Update changelog when updating version numbers
+- Store descriptions, screenshots, and other assets need to be stored locally
+- Follow Chrome Web Store content policies and technical specifications
+
+### Version Management
+- Use semantic versioning (semver)
+- Important version changes require detailed release notes
+- Preserve historical version package files for rollback purposes
+
+## Required File Structure
+```
+/release/
+├── build/          # Build scripts
+├── packages/       # Package file storage
+├── store-assets/   # Store assets (icons, screenshots, descriptions)
+└── changelog.md    # Version update records
+```

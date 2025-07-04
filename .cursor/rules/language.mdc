@@ -1,0 +1,43 @@
+---
+description: English-only development rule - All project development must be conducted in English
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# English-Only Development Rule
+
+## Overview
+This project must be developed entirely in English to ensure consistency, maintainability, and collaboration effectiveness.
+
+## Core Requirements
+
+### Code Development
+- **Variable names**: Use descriptive English names (e.g., `isArticleRead`, `markAsReadButton`)
+- **Function names**: Use English verbs and nouns (e.g., `markArticleAsRead()`, `getUnreadCount()`)
+- **Class names**: Use English nouns in PascalCase (e.g., `ArticleManager`, `StorageHandler`)
+- **Constants**: Use English in UPPER_SNAKE_CASE (e.g., `MAX_ARTICLES_COUNT`, `DEFAULT_THEME`)
+
+### Comments and Documentation
+- **Code comments**: All inline comments and block comments must be in English
+- **JSDoc**: Function and class documentation must be in English
+- **README files**: All documentation files must be written in English
+- **API documentation**: All endpoint and parameter descriptions in English
+
+### Configuration and Metadata
+- **Package.json**: All descriptions, keywords, and metadata in English
+- **Manifest.json**: All Chrome extension descriptions and permissions in English
+- **Configuration files**: All comments and descriptions in English
+
+### Version Control
+- **Commit messages**: All commit messages must be in English using conventional format
+- **Branch names**: Use English descriptive names (e.g., `feature/mark-as-read`, `fix/popup-styling`)
+- **Pull request titles and descriptions**: Must be in English
+
+## Exceptions
+- **User-facing text**: UI text can be localized for end users
+- **External communications**: Communication with users may be in their preferred language
+
+## Enforcement
+- Code reviews must verify adherence to English-only development
+- Non-English code elements should be refactored during development

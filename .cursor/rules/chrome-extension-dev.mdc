@@ -1,0 +1,65 @@
+---
+description: Chrome extension development standards - Ensures compliant and high-availability extension development
+globs: ["src/**", "manifest.json", "**/*.js", "**/*.css", "**/*.html"]
+alwaysApply: false
+---
+
+# Chrome Extension Development Standards
+
+## Core Requirements
+
+### Manifest V3 Compliance
+- Must use Manifest V3 format with proper structure and required fields
+- Use service workers instead of background pages
+- Implement proper permission declarations with minimal scope
+- Follow content security policy (CSP) guidelines
+
+### Security Standards
+- **No inline scripts**: All JavaScript must be in external files
+- **CSP compliance**: Strict content security policy implementation
+- **Permission minimization**: Request only necessary permissions
+- **Secure communication**: Use HTTPS for all external requests
+- **Input validation**: Sanitize all user inputs and external data
+
+### Performance Optimization
+- **Lazy loading**: Load resources only when needed
+- **Memory management**: Proper cleanup of event listeners and references
+- **Efficient DOM manipulation**: Minimize reflow and repaint operations
+- **Background script optimization**: Use event-driven architecture
+
+### Code Quality
+- **Error handling**: Comprehensive try-catch blocks and error logging
+- **Async/await**: Use modern JavaScript async patterns
+- **Modular structure**: Separate concerns into different modules
+- **Event cleanup**: Remove event listeners when components unmount
+
+### User Experience
+- **Responsive design**: Support different screen sizes and zoom levels
+- **Accessibility**: ARIA labels and keyboard navigation support
+- **Loading states**: Provide feedback during async operations
+- **Error messages**: Clear, user-friendly error communication
+
+### Store Policy Compliance
+- **No prohibited content**: Avoid spam, malware, or policy violations
+- **Privacy compliance**: Transparent data collection and usage
+- **Functionality description**: Accurate extension description and permissions
+- **Regular updates**: Maintain compatibility with Chrome updates
+
+## File Structure Standards
+```
+src/
+├── background/         # Service worker files
+├── content/           # Content scripts and styles
+├── popup/             # Extension popup interface
+├── options/           # Options/settings page
+└── utils/             # Shared utility functions
+```
+
+## Development Checklist
+- [ ] Manifest V3 validation
+- [ ] CSP policy verification
+- [ ] Permission audit
+- [ ] Performance profiling
+- [ ] Accessibility testing
+- [ ] Cross-browser compatibility
+- [ ] Security vulnerability scan
