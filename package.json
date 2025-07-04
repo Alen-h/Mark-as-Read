@@ -17,6 +17,7 @@
     "watch:all": "concurrently \"npm run watch:scss:popup\" \"npm run watch:scss:history\" \"npm run watch:scss:content\"",
     "dev": "npm run watch:all",
     "build": "npm run build:all",
+    "package": "chmod +x release/build/package.sh && ./release/build/package.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
