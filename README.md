@@ -90,7 +90,7 @@ Mark as Read/
 ├── package.json           # Dependencies and build scripts
 ├── package-lock.json      # Locked dependency versions
 ├── LICENSE               # MIT License
-├── PRIVACY_POLICY.md      # Privacy policy
+├── PRIVACY-POLICY.md      # Privacy policy
 ├── privacy-policy.html    # Privacy policy HTML version
 ├── README.md             # This file
 ├── src/
@@ -234,7 +234,7 @@ This extension respects your privacy:
 - All data is stored locally in your Chrome browser
 - Sync feature uses Chrome's built-in sync (optional)
 - No tracking or analytics
-- See [Privacy Policy](PRIVACY_POLICY.md) for details
+- See [Privacy Policy](PRIVACY-POLICY.md) for details
 
 ## 🐛 Troubleshooting
 
