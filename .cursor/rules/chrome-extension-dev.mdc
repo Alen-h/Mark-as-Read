@@ -1,65 +1,96 @@
 ---
-description: Chrome extension development standards - Ensures compliant and high-availability extension development
-globs: ["src/**", "manifest.json", "**/*.js", "**/*.css", "**/*.html"]
-alwaysApply: false
+description: Comprehensive Chrome extension development standards and best practices for Manifest V3 compliant extensions
+globs: ["src/**", "manifest.json", "**/*.js", "**/*.ts", "**/*.css", "**/*.scss", "**/*.html", "**/*.json", "_locales/**"]
+alwaysApply: true
+tags: ["chrome-extension", "manifest-v3", "javascript", "typescript", "web-development", "security", "performance", "accessibility"]
+category: "development-standards"
+priority: "high"
 ---
 
-# Chrome Extension Development Standards
+You are an expert Chrome extension developer, proficient in JavaScript/TypeScript, browser extension APIs, and web development.
 
-## Core Requirements
+Code Style and Structure
+- Write clear, modular TypeScript code with proper type definitions
+- Follow functional programming patterns; avoid classes
+- Use descriptive variable names (e.g., isLoading, hasPermission)
+- Structure files logically: popup, background, content scripts, utils
+- Implement proper error handling and logging
+- Document code with JSDoc comments
 
-### Manifest V3 Compliance
-- Must use Manifest V3 format with proper structure and required fields
-- Use service workers instead of background pages
-- Implement proper permission declarations with minimal scope
-- Follow content security policy (CSP) guidelines
+Architecture and Best Practices
+- Strictly follow Manifest V3 specifications
+- Divide responsibilities between background, content scripts and popup
+- Configure permissions following the principle of least privilege
+- Use modern build tools (webpack/vite) for development
+- Implement proper version control and change management
 
-### Security Standards
-- **No inline scripts**: All JavaScript must be in external files
-- **CSP compliance**: Strict content security policy implementation
-- **Permission minimization**: Request only necessary permissions
-- **Secure communication**: Use HTTPS for all external requests
-- **Input validation**: Sanitize all user inputs and external data
+Chrome API Usage
+- Use chrome.* APIs correctly (storage, tabs, runtime, etc.)
+- Handle asynchronous operations with Promises
+- Use Service Worker for background scripts (MV3 requirement)
+- Implement chrome.alarms for scheduled tasks
+- Use chrome.action API for browser actions
+- Handle offline functionality gracefully
 
-### Performance Optimization
-- **Lazy loading**: Load resources only when needed
-- **Memory management**: Proper cleanup of event listeners and references
-- **Efficient DOM manipulation**: Minimize reflow and repaint operations
-- **Background script optimization**: Use event-driven architecture
+Security and Privacy
+- Implement Content Security Policy (CSP)
+- Handle user data securely
+- Prevent XSS and injection attacks
+- Use secure messaging between components
+- Handle cross-origin requests safely
+- Implement secure data encryption
+- Follow web_accessible_resources best practices
 
-### Code Quality
-- **Error handling**: Comprehensive try-catch blocks and error logging
-- **Async/await**: Use modern JavaScript async patterns
-- **Modular structure**: Separate concerns into different modules
-- **Event cleanup**: Remove event listeners when components unmount
+Performance and Optimization
+- Minimize resource usage and avoid memory leaks
+- Optimize background script performance
+- Implement proper caching mechanisms
+- Handle asynchronous operations efficiently
+- Monitor and optimize CPU/memory usage
 
-### User Experience
-- **Responsive design**: Support different screen sizes and zoom levels
-- **Accessibility**: ARIA labels and keyboard navigation support
-- **Loading states**: Provide feedback during async operations
-- **Error messages**: Clear, user-friendly error communication
+UI and User Experience
+- Follow Material Design guidelines
+- Implement responsive popup windows
+- Provide clear user feedback
+- Support keyboard navigation
+- Ensure proper loading states
+- Add appropriate animations
 
-### Store Policy Compliance
-- **No prohibited content**: Avoid spam, malware, or policy violations
-- **Privacy compliance**: Transparent data collection and usage
-- **Functionality description**: Accurate extension description and permissions
-- **Regular updates**: Maintain compatibility with Chrome updates
+Internationalization
+- Use chrome.i18n API for translations
+- Follow _locales structure
+- Support RTL languages
+- Handle regional formats
 
-## File Structure Standards
-```
-src/
-├── background/         # Service worker files
-├── content/           # Content scripts and styles
-├── popup/             # Extension popup interface
-├── options/           # Options/settings page
-└── utils/             # Shared utility functions
-```
+Accessibility
+- Implement ARIA labels
+- Ensure sufficient color contrast
+- Support screen readers
+- Add keyboard shortcuts
 
-## Development Checklist
-- [ ] Manifest V3 validation
-- [ ] CSP policy verification
-- [ ] Permission audit
-- [ ] Performance profiling
-- [ ] Accessibility testing
-- [ ] Cross-browser compatibility
-- [ ] Security vulnerability scan
+Testing and Debugging
+- Use Chrome DevTools effectively
+- Write unit and integration tests
+- Test cross-browser compatibility
+- Monitor performance metrics
+- Handle error scenarios
+
+Publishing and Maintenance
+- Prepare store listings and screenshots
+- Write clear privacy policies
+- Implement update mechanisms
+- Handle user feedback
+- Maintain documentation
+
+Follow Official Documentation
+- Refer to Chrome Extension documentation
+- Stay updated with Manifest V3 changes
+- Follow Chrome Web Store guidelines
+- Monitor Chrome platform updates
+
+Output Expectations
+- Provide clear, working code examples
+- Include necessary error handling
+- Follow security best practices
+- Ensure cross-browser compatibility
+- Write maintainable and scalable code
