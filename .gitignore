@@ -3,11 +3,12 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # Build output
 dist/
-/build/
 build/
+/build/
 
 # Compiled CSS files from SCSS
 src/popup/popup.css
@@ -34,15 +35,26 @@ web-ext-artifacts/
 .env.development
 .env.test
 
-# System files
+# System files - macOS
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
+.AppleDouble
+.LSOverride
+Icon
+
+# System files - Windows
 ehthumbs.db
 Thumbs.db
 desktop.ini
+Desktop.ini
+
+# System files - Linux
+*~
+.directory
+.Trash-*
 
 # IDE and editors
 .vscode/
@@ -87,32 +99,15 @@ coverage/
 test-results/
 playwright-report/
 
-# OS generated files
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-._*
-
-# Linux
-*~
-.directory
-.Trash-*
-
 # Chrome extension development
-# Chrome user data directory (if testing)
 chrome-user-data/
 chrome-profile/
+chrome-extension-data/
 
 # Extension store assets (keep in repo but ignore local copies)
 store-assets/screenshots/
 store-assets/temp/
+store-assets/local/
 
 # Local development certificates
 *.cert
@@ -134,7 +129,7 @@ store-assets/temp/
 .vscode/extensions.json
 
 # Runtime data
-pids
+pids/
 *.pid
 *.seed
 *.pid.lock
@@ -163,25 +158,27 @@ pids
 # Yarn Integrity file
 .yarn-integrity
 
-# parcel-bundler cache (https://parceljs.org/)
+# Parcel bundler cache
 .cache
 .parcel-cache
 
 # Next.js build output
 .next
+out/
 
 # Nuxt.js build / generate output
 .nuxt
+dist/
 
 # Gatsby files
 .cache/
-public
+public/
 
 # Storybook build outputs
 .out
 .storybook-out
 
-# Rollup.js default build output
+# Rollup.js build output
 dist/
 
 # Serverless directories
@@ -199,10 +196,55 @@ dist/
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-# Firebase
-.firebase/
-firebase-debug.log
-firestore-debug.log
+# Chrome extension specific
+# Compiled manifest (if using build process)
+manifest-compiled.json
 
-# Sentry
-.sentryclirc 
+# Local extension testing
+test-extension/
+extension-build/
+
+# Source maps (if not needed in production)
+*.map
+
+# Build artifacts
+build-artifacts/
+
+# Performance monitoring
+.clinic/
+.0x/
+
+# Webpack
+.webpack/
+
+# Babel
+.babel-cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# ESLint
+.eslintcache
+
+# Prettier
+.prettierignore
+
+# Husky
+.husky/_
+
+# Local configuration
+.local
+local.json
+config.local.json
+
+# Chrome extension development tools
+extension-tools/
+dev-tools/
+
+# Auto-generated files
+auto-generated/
+generated/
+
+# Temporary build files
+tmp-build/
+temp-build/ 

@@ -89,18 +89,19 @@ Mark as Read/
 ├── manifest.json          # Extension configuration (Manifest V3)
 ├── package.json           # Dependencies and build scripts
 ├── package-lock.json      # Locked dependency versions
+├── LICENSE               # MIT License
+├── PRIVACY_POLICY.md      # Privacy policy
+├── privacy-policy.html    # Privacy policy HTML version
+├── README.md             # This file
 ├── src/
 │   ├── popup/
 │   │   ├── popup.html     # Popup interface
-│   │   ├── popup.js       # Popup logic and event handlers
-│   │   └── popup.css      # Popup styles (compiled from SCSS)
+│   │   └── popup.js       # Popup logic and event handlers
 │   ├── history/
 │   │   ├── history.html   # History page interface
-│   │   ├── history.js     # History page logic
-│   │   └── history.css    # History page styles (compiled from SCSS)
+│   │   └── history.js     # History page logic
 │   ├── content/
-│   │   ├── content.js     # Content script for page injection
-│   │   └── styles.css     # Content script styles (compiled from SCSS)
+│   │   └── content.js     # Content script for page injection
 │   ├── background/
 │   │   └── background.js  # Background service worker
 │   └── styles/            # SCSS source files
@@ -116,18 +117,19 @@ Mark as Read/
 │       ├── history.scss   # History entry file
 │       ├── content.scss   # Content script entry file
 │       └── main.scss      # Main style entry
-├── assets/
-│   └── icons/             # Icon files (16x16 to 1024x1024)
-├── docs/
-│   └── design-system.md  # Design system documentation
-├── PRIVACY_POLICY.md      # Privacy policy
-├── LICENSE               # MIT License
-└── README.md             # This file
+└── assets/
+    └── icons/             # Icon files (16x16 to 1024x1024)
+        ├── icon16.png
+        ├── icon32.png
+        ├── icon48.png
+        ├── icon64.png
+        ├── icon128.png
+        └── icon1024.png
 ```
 
 ## 🎨 Minimal Flat Design
 
-This project follows minimal flat design principles. For detailed information, see [Design System Documentation](docs/design-system.md).
+This project follows minimal flat design principles focused on:
 
 ### Design Philosophy
 - **Visual Simplicity**: Remove all unnecessary decorative effects
@@ -180,8 +182,13 @@ npm run build:scss:popup
 npm run build:scss:history
 npm run build:scss:content
 
-# Clean build artifacts
-npm run clean
+# Watch individual components
+npm run watch:scss:popup
+npm run watch:scss:history
+npm run watch:scss:content
+
+# Watch all components
+npm run watch:all
 ```
 
 ### Testing
@@ -201,7 +208,9 @@ npm run clean
 
 - `storage`: Store read URL data locally and sync across devices
 - `activeTab`: Get current active tab information
-- `host_permissions`: Inject content scripts on all websites (`<all_urls>`)
+- `tabs`: Access tab information
+- `notifications`: Show notifications to users
+- `host_permissions`: Inject content scripts on all websites (`http://*/*`, `https://*/*`)
 
 ## 💾 Data Storage Format
 
@@ -232,7 +241,7 @@ This extension respects your privacy:
 ### Common Issues
 
 1. **Extension not working**: Try reloading the extension in `chrome://extensions/`
-2. **Styles not applied**: Check if SCSS files are compiled correctly
+2. **Styles not applied**: Run `npm run build` to compile SCSS files
 3. **Sync not working**: Ensure Chrome sync is enabled in your browser
 4. **Badge not showing**: Check if the website has conflicting CSS
 

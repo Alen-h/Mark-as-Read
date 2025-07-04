@@ -26,8 +26,8 @@
     "web-tracking",
     "productivity"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Alen Hu <https://github.com/Alen-h>",
+  "license": "MIT",
   "devDependencies": {
     "archiver": "^7.0.1",
     "concurrently": "^8.2.2",
