@@ -1,10 +1,13 @@
 # Dependencies
 node_modules/
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Build output
 dist/
 /build/
+build/
 
 # Compiled CSS files from SCSS
 src/popup/popup.css
@@ -16,16 +19,20 @@ src/content/styles.css
 *.scss.map
 
 # Chrome Extension packaging
-release/packages/
+release/
+packages/
 *.zip
 *.crx
 *.pem
+*.key
+web-ext-artifacts/
 
 # Environment variables
 .env
 .env.local
 .env.production
 .env.development
+.env.test
 
 # System files
 .DS_Store
@@ -35,6 +42,7 @@ release/packages/
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
 
 # IDE and editors
 .vscode/
@@ -42,15 +50,159 @@ Thumbs.db
 *.swp
 *.swo
 *~
+*.sublime-project
+*.sublime-workspace
+.project
+.settings/
+.metadata/
+.classpath
 
 # Logs
-logs
+logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # Temporary files
 tmp/
 temp/
+.tmp/
+.temp/
+
+# Package managers
+yarn.lock
+pnpm-lock.yaml
+.pnpmfile.js
+.yarn/
+.yarnrc.yml
+
+# Coverage and testing
+coverage/
+*.lcov
+.nyc_output/
+.coverage/
+.jest/
+test-results/
+playwright-report/
+
+# OS generated files
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Linux
+*~
+.directory
+.Trash-*
 
 # Chrome extension development
+# Chrome user data directory (if testing)
+chrome-user-data/
+chrome-profile/
+
+# Extension store assets (keep in repo but ignore local copies)
+store-assets/screenshots/
+store-assets/temp/
+
+# Local development certificates
+*.cert
+*.crt
 *.key
-web-ext-artifacts/ 
+*.pem
+
+# Backup files
+*.backup
+*.bak
+*.orig
+*.rej
+
+# Editor temp files
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/c_cpp_properties.json
+.vscode/extensions.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Rollup.js default build output
+dist/
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+
+# Sentry
+.sentryclirc 
